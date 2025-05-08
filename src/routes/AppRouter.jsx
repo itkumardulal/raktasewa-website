@@ -38,10 +38,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 const AboutUs = lazy(() => import("../pages/AboutUs"));
 const OurTeam = lazy(() => import("../pages/OurTeam"));
 const BloodGroup = lazy(() => import("../pages/BloodGroup"));
-const Donors = lazy(() => import("../pages/donors"));
+const Donors = lazy(() => import("../pages/Donors"));
 const DonateBloodForm = lazy(() => import("../pages/DonateBloodForm"));
 const RequestBloodForm = lazy(() => import("../pages/RequestBloodForm"));
-const RequestMatchResult = lazy(() => import("../pages/RequestMatchResult."));
+const RequestMatchResult = lazy(() => import("../pages/RequestMatchResult"));
 const Index = lazy(() => import("../pages"));
 
 export default function AppRouter() {
