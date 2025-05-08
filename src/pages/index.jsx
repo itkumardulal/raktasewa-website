@@ -4,9 +4,7 @@ import Home from "./Home";
 import AboutUs from "./AboutUs";
 import OurTeam from "./OurTeam";
 import BloodGroup from "./BloodGroup";
-import Donors from "./donors";
-import DonateBloodForm from "./DonateBloodForm";
-import RequestBloodForm from "./RequestBloodForm";
+import Donors from "./Donors";
 import Footer from "./Footer";
 
 export default function Index() {
@@ -27,12 +25,6 @@ export default function Index() {
       <section id="recent-donors">
         <Donors />
       </section>
-      {/* <section id="donate-blood-form">
-        <DonateBloodForm />
-      </section>
-      <section id="request-blood-form">
-        <RequestBloodForm />
-      </section> */}
       <Footer />
     </>
   );
