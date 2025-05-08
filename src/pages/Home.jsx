@@ -1,6 +1,6 @@
 /*  src/pages/Home.jsx  */
 import React, { useEffect, useState } from "react";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import StatDonut from "../components/StatDonut";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import BloodtypeIcon from "@mui/icons-material/Bloodtype";
