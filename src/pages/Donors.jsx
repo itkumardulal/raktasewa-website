@@ -7,37 +7,37 @@ const maroon = "#800000";
 /* Replace with real data / API */
 const donors = [
   {
-    name: "Priya Sharma",
+    name: "Sita Rai",
     bloodType: "A+",
     date: "26 Apr 2025",
     img: "/user.jpg",
   },
   {
-    name: "Jonathan Cruz",
+    name: "Ramesh Thapa",
     bloodType: "O-",
     date: "25 Apr 2025",
     img: "/user.jpg",
   },
   {
-    name: "Fatima Noor",
+    name: "Maya Gurung",
     bloodType: "B+",
     date: "24 Apr 2025",
     img: "/user.jpg",
   },
   {
-    name: "Alex Lee",
+    name: "Bikash Shrestha",
     bloodType: "AB-",
     date: "23 Apr 2025",
     img: "/user.jpg",
   },
   {
-    name: "Isabella Garcia",
+    name: "Anjali Lama",
     bloodType: "O+",
     date: "22 Apr 2025",
     img: "/user.jpg",
   },
   {
-    name: "Mohammed Khan",
+    name: "Dipesh Karki",
     bloodType: "A-",
     date: "21 Apr 2025",
     img: "/user.jpg",
