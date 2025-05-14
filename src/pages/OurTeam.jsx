@@ -11,16 +11,21 @@ const team = [
     role: "Chief Technology Officer",
     img: "/bosskumar.jpg",
   },
-  { name: "Deepa Roy", role: "-", img: "/team1.jpeg" },
+  { name: "Prashant dhakal", role: "New Step", img: "/team7.jpg" },
+
+  { name: "Deepa Roy", role: "IT", img: "/team1.jpeg" },
   {
     name: "Surakshya Adhikari",
     role: " Management and Fara Collectiion",
     img: "/team2.jpeg",
   },
-  { name: "unknown", role: "-", img: "/team3.jpeg" },
-  { name: "Charchita Adhikari", role: "-", img: "/team4.jpeg" },
-  { name: "ANISH B.K", role: "Donor Liaison", img: "/team5.jpg" },
-  { name: "Man Bahadur Bhandari", role: "Donor Liaison", img: "/team6.jpg" },
+  {
+    name: "Charchita Adhikari",
+    role: "Survey and Data Collection",
+    img: "/team4.jpeg",
+  },
+  { name: "ANISH B.K", role: "IT", img: "/team5.jpg" },
+  { name: "Man Bahadur Bhandari", role: "IT", img: "/team6.jpg" },
   { name: "Ajax Alyson", role: "Web Developer", img: "/lead_dev.jpg" },
 ];
 
