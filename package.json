@@ -5,8 +5,11 @@
   "author": "developer ajax alyson",
   "type": "module",
   "scripts": {
+      "start": "serve -s build -l $PORT",
+  "build": "cross-env CI=false react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
     "dev": "vite",
-    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -21,6 +24,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.5.2",
+    "serve": "^14.2.4",
     "sweetalert2": "^11.19.1"
   },
   "devDependencies": {

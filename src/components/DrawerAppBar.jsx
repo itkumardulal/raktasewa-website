@@ -21,11 +21,11 @@ import { Link as RouterLink } from "react-router-dom";
 const maroon = "#800000";
 
 const navItems = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Our Team", path: "/team" },
-  { label: "Blood Group", path: "/blood-group" },
-  { label: "Donors", path: "/recent-donors" },
+  { label: "🏠 Home", path: "/" },
+  { label: "📜About", path: "/about" },
+  { label: "👨‍👨‍👦‍👦 Our Team", path: "/team" },
+  { label: "🩸Blood Group", path: "/blood-group" },
+  { label: "🤝 Donors", path: "/recent-donors" },
 ];
 
 const drawerWidth = 240; // desktop / tablet width
