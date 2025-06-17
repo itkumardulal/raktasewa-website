@@ -7,9 +7,9 @@
   "scripts": {
   "dev": "vite",
   "build": "vite build",
-  "start": "node server.js",
-    "lint": "eslint .",
-    "preview": "vite preview"
+  "start": "vite preview --port $PORT",
+  "lint": "eslint .",
+  "preview": "vite preview"
   },
   "dependencies": {
     "@date-io/dayjs": "^3.2.0",
@@ -24,8 +24,6 @@
     "react-router-dom": "^7.5.2",
     "sweetalert2": "^11.19.1"
   },
-
-  
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "@types/react": "^19.0.10",
