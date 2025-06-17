@@ -5,6 +5,7 @@
   "author": "developer ajax alyson",
   "type": "module",
   "scripts": {
+    "start": "serve -s build -l $PORT",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
