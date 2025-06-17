@@ -5,9 +5,9 @@
   "author": "developer ajax alyson",
   "type": "module",
   "scripts": {
-    "build": "vite build",
-    "start": "vite preview --port $PORT",
-    "dev": "vite",
+  "dev": "vite",
+  "build": "vite build",
+  "start": "node server.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
