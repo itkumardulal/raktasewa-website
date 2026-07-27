@@ -1,10 +1,8 @@
 /*  src/pages/OurTeam.jsx  */
 import React from "react";
 import { Container, Box, Avatar, Typography, Paper } from "@mui/material";
+import { brand } from "../constants/brand";
 
-const maroon = "#800000";
-
-/* Swap these with real images / people */
 const team = [
   {
     name: "Kumar Dulal",
@@ -12,7 +10,6 @@ const team = [
     img: "/bosskumar.jpg",
   },
   { name: "Prashant dhakal", role: "New Step", img: "/team7.jpg" },
-
   { name: "Deepa Roy", role: "IT", img: "/team1.jpeg" },
   {
     name: "Surakshya Adhikari",
@@ -30,33 +27,46 @@ const team = [
 export default function OurTeam() {
   return (
     <Container sx={{ mt: 8, mb: 10 }}>
-      <Typography variant="h5" sx={{ mb: 4, textAlign: "center" }}>
-        Meet&nbsp;Our&nbsp;Team
+      <Typography
+        variant="h4"
+        sx={{ mb: 1, textAlign: "center", color: brand.ink }}
+      >
+        Meet Our Team
+      </Typography>
+      <Typography
+        align="center"
+        color="text.secondary"
+        sx={{ mb: 5, maxWidth: 480, mx: "auto" }}
+      >
+        People behind Emergency Blood Provider, working to connect donors and patients.
       </Typography>
 
-      {/* flexbox, no Grid component */}
       <Box
         sx={{
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: 4, // row + column gap
+          gap: 4,
         }}
       >
         {team.map(({ name, role, img }) => (
           <Paper
             key={name}
-            elevation={1}
+            elevation={0}
             sx={{
-              /* 1-per-row phones | 2-per-row tablets | 3-per-row desktops */
               flexBasis: { xs: "100%", sm: "47%", md: "30%" },
               maxWidth: 360,
               p: 3,
               textAlign: "center",
-              borderRadius: 2,
+              borderRadius: 3,
+              border: `1px solid ${brand.line}`,
+              transition: "transform 0.2s ease, box-shadow 0.2s ease",
+              "&:hover": {
+                transform: "translateY(-4px)",
+                boxShadow: "0 12px 32px rgba(26, 21, 35, 0.08)",
+              },
             }}
           >
-            {/* circular avatar with maroon ring */}
             <Box
               sx={{
                 width: 140,
@@ -65,7 +75,7 @@ export default function OurTeam() {
                 mb: 2,
                 borderRadius: "50%",
                 overflow: "hidden",
-                border: `4px solid ${maroon}`,
+                border: `3px solid ${brand.primary}`,
               }}
             >
               <Avatar
@@ -75,7 +85,7 @@ export default function OurTeam() {
               />
             </Box>
 
-            <Typography variant="subtitle1" fontWeight={600}>
+            <Typography variant="subtitle1" fontWeight={700}>
               {name}
             </Typography>
             <Typography variant="body2" color="text.secondary">

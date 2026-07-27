@@ -33,6 +33,7 @@
 
 import React, { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 // Dynamically import pages using React.lazy
 const AboutUs = lazy(() => import("../pages/AboutUs"));
@@ -47,7 +48,21 @@ const Index = lazy(() => import("../pages"));
 export default function AppRouter() {
   return (
     // Wrap Routes with Suspense to handle lazy-loaded components
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <Box
+          sx={{
+            minHeight: "50vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "text.secondary",
+          }}
+        >
+          Loading…
+        </Box>
+      }
+    >
       <Routes>
         <Route index element={<Index />} /> {/* Now using Index as homepage */}
         <Route path="about" element={<AboutUs />} />

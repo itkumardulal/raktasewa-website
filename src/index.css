@@ -1,12 +1,20 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  --brand-primary: #8b1538;
+  --brand-primary-dark: #5c0e25;
+  --brand-accent: #0f6b5c;
+  --brand-ink: #1a1523;
+  --brand-muted: #5c5668;
+  --brand-surface: #fff8f7;
+  --brand-surface-alt: #f3eef0;
+  --brand-line: rgba(139, 21, 56, 0.12);
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+
+  font-family: var(--font-body);
+  line-height: 1.6;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: var(--brand-ink);
+  background-color: var(--brand-surface);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,62 +25,72 @@ html {
   scroll-behavior: smooth;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/* body {
+body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-} */
-body {
-  margin: 8px; /* Common browser default */
-  display: block; /* Default for body */
-  min-width: 0; /* No minimum width constraint by default */
-  min-height: 0; /* No minimum height constraint by default */
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(139, 21, 56, 0.1), transparent 60%),
+    radial-gradient(900px 420px at 100% 0%, rgba(15, 107, 92, 0.08), transparent 55%),
+    var(--brand-surface);
+  color: var(--brand-ink);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  min-height: 100vh;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+a {
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+img {
+  max-width: 100%;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  a:hover {
-    color: #747bff;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.7s ease both;
+}
+
+.hero-orb {
+  animation: soft-pulse 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fade-up,
+  .hero-orb {
+    animation: none;
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography, Grid, Avatar } from "@mui/material";
+import { brand } from "../constants/brand";
 
 const partners = [
   { name: "Nepal Red Cross", logo: "/redcross.jpg" },
@@ -16,15 +17,23 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        mt: 8,
-        py: 6,
+        mt: 0,
+        py: { xs: 6, md: 8 },
         px: 2,
         textAlign: "center",
-        backgroundColor: "#f9f9f9",
+        background: `linear-gradient(180deg, ${brand.surfaceAlt} 0%, #ebe4e7 100%)`,
+        borderTop: `1px solid ${brand.line}`,
       }}
     >
-      <Typography variant="h6" gutterBottom>
+      <Typography
+        variant="h5"
+        gutterBottom
+        sx={{ fontFamily: "Fraunces, Georgia, serif", color: brand.ink }}
+      >
         Our Partners
+      </Typography>
+      <Typography color="text.secondary" sx={{ mb: 4, maxWidth: 420, mx: "auto" }}>
+        Trusted institutions helping us connect donors and patients faster.
       </Typography>
 
       <Grid
@@ -32,7 +41,7 @@ export default function Footer() {
         spacing={4}
         justifyContent="center"
         alignItems="center"
-        sx={{ mb: 4 }}
+        sx={{ mb: 4, maxWidth: 900, mx: "auto" }}
       >
         {partners.map((partner, index) => (
           <Grid item key={index}>
@@ -40,9 +49,15 @@ export default function Footer() {
               <Avatar
                 src={partner.logo}
                 alt={partner.name}
-                sx={{ width: 56, height: 56, mb: 1 }}
+                sx={{
+                  width: 64,
+                  height: 64,
+                  mb: 1,
+                  bgcolor: brand.white,
+                  border: `1px solid ${brand.line}`,
+                }}
               />
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 120 }}>
                 {partner.name}
               </Typography>
             </Box>

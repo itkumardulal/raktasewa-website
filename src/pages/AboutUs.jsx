@@ -12,8 +12,10 @@ import {
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link as RouterLink } from "react-router-dom"; // make sure this import is present
 
-const maroon = "#800000";
-const pinkBg = "#ffe9e9";
+import { brand } from "../constants/brand";
+
+const maroon = brand.primary;
+const pinkBg = brand.accentSoft;
 
 /* ───────────────────── 1. TESTIMONIAL ───────────────────── */
 function Testimonial() {

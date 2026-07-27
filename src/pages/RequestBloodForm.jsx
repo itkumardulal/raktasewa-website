@@ -21,8 +21,9 @@ import {
 } from "@mui/material";
 import Footer from "./Footer";
 import { apiUrl } from "../config/api";
+import { brand } from "../constants/brand";
 
-const maroon = "#ff3b30";
+const maroon = brand.primary;
 
 const bloodGroups = [
   "A+",
@@ -259,12 +260,13 @@ export default function RequestBloodForm() {
   return (
     <Container maxWidth="lg" sx={{ my: 8 }}>
       <Paper
-        elevation={6}
+        elevation={0}
         sx={{
           mx: "auto",
           borderRadius: 3,
           p: { xs: 3, sm: 5 },
-          boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+          border: `1px solid ${brand.line}`,
+          boxShadow: "0 12px 40px rgba(26, 21, 35, 0.06)",
         }}
       >
         {/* ✅ Message Box */}

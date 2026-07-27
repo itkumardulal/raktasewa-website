@@ -13,7 +13,7 @@ import {
   Box,
 } from "@mui/material";
 
-const maroon = "#c40000"; // feel free to tweak
+const maroon = "#8B1538"; // brand primary
 
 const rows = [
   { type: "A+", donate: "A+  AB+", receive: "A+  A-  O+  O-" },
@@ -38,7 +38,11 @@ export default function BloodGroup() {
         KNOW MORE ABOUT YOUR BLOOD GROUP
       </Typography>
 
-      <TableContainer component={Paper} elevation={3}>
+      <TableContainer
+        component={Paper}
+        elevation={0}
+        sx={{ borderRadius: 3, border: "1px solid rgba(139, 21, 56, 0.12)", overflow: "hidden" }}
+      >
         <Table>
           {/* red banner */}
           <TableHead>

@@ -1,24 +1,35 @@
 import { PieChart } from "@mui/x-charts/PieChart";
-import { Box, Typography } from "@mui/material";
-
-const maroon = "#800000";
+import { Box, Paper, Typography } from "@mui/material";
+import { brand } from "../constants/brand";
 
 /** Donut with animated arc + centred value */
 export default function StatDonut({
   label,
   value,
-  updatedAt = "April 26, 2025", // default date
+  updatedAt = "April 26, 2025",
 }) {
   const data = [
-    { id: 0, value, color: maroon },
-    { id: 1, value: 100 - value, color: "#e0e0e0" },
+    { id: 0, value, color: brand.primary },
+    { id: 1, value: Math.max(100 - Number(value || 0), 0), color: "#EAD6DB" },
   ];
 
   return (
-    <Box textAlign="center">
-      <Typography variant="subtitle2">{label}</Typography>
+    <Paper
+      elevation={0}
+      sx={{
+        textAlign: "center",
+        p: 2.5,
+        borderRadius: 3,
+        border: `1px solid ${brand.line}`,
+        bgcolor: brand.white,
+        width: "100%",
+        maxWidth: 220,
+      }}
+    >
+      <Typography variant="subtitle2" fontWeight={700}>
+        {label}
+      </Typography>
 
-      {/* Last-updated line is now consistently placed under the title */}
       <Typography
         variant="caption"
         color="text.secondary"
@@ -27,7 +38,6 @@ export default function StatDonut({
         Last updated on : {updatedAt}
       </Typography>
 
-      {/* ── donut + absolute-centred number ── */}
       <Box
         sx={{
           position: "relative",
@@ -52,7 +62,6 @@ export default function StatDonut({
           slotProps={{ legend: { hidden: true } }}
         />
 
-        {/* number in the centre */}
         <Typography
           variant="h6"
           sx={{
@@ -61,6 +70,8 @@ export default function StatDonut({
             left: "50%",
             transform: "translate(-50%, -50%)",
             pointerEvents: "none",
+            fontWeight: 700,
+            color: brand.primary,
           }}
         >
           {value}
@@ -70,6 +81,6 @@ export default function StatDonut({
       <Typography variant="caption" color="text.secondary">
         based on number of blood supply requests
       </Typography>
-    </Box>
+    </Paper>
   );
 }
