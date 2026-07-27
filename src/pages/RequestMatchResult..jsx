@@ -11,9 +11,8 @@ import {
   FormControl,
   Paper,
 } from "@mui/material";
-import CallIcon from "@mui/icons-material/Call";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { apiUrl } from "../config/api";
+import DonorContactActions from "../components/DonorContactActions";
 
 export default function RequestMatchResult() {
   const { requestId, bloodGroup } = useParams();
@@ -123,41 +122,10 @@ export default function RequestMatchResult() {
                   </Typography>
                 </Box>
 
-                <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
-                  {/* Call Button */}
-                  <Button
-                    fullWidth
-                    variant="outlined"
-                    color="primary"
-                    href={`tel:${donor.phone_number}`}
-                    sx={{
-                      py: 1.2, // Vertical padding (increased height)
-                      px: 2, // Horizontal padding (optional)
-                    }}
-                  >
-                    Call <CallIcon fontSize="small" sx={{ ml: 1 }} />
-                  </Button>
-
-                  {/* WhatsApp Button */}
-                  <Button
-                    fullWidth
-                    variant="outlined"
-                    color="success"
-                    href={`https://wa.me/${donor.phone_number.replace(
-                      /[^0-9]/g,
-                      ""
-                    )}?text=${encodeURIComponent(
-                      "Hi! I found your contact from the blood donation app. Are you available to donate blood?"
-                    )}`}
-                    target="_blank"
-                    sx={{
-                      py: 1.2, // Vertical padding (increased height)
-                      px: 2, // Horizontal padding (optional)
-                    }}
-                  >
-                    WhatsApp <WhatsAppIcon fontSize="small" sx={{ ml: 1 }} />
-                  </Button>
-                </Box>
+                <DonorContactActions
+                  phone={donor.phone_number}
+                  donorName={donor.fullname}
+                />
               </Paper>
             ))}
           </Box>
