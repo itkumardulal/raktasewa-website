@@ -5,6 +5,7 @@ import StatDonut from "../components/StatDonut";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import BloodtypeIcon from "@mui/icons-material/Bloodtype";
 import { Link as RouterLink } from "react-router-dom";
+import { apiUrl } from "../config/api";
 
 const maroon = "#800000";
 
@@ -15,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/public/stats`);
+        const res = await fetch(apiUrl("/public/stats"));
         const data = await res.json();
 
         setStats([

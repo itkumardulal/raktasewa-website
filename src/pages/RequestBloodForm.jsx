@@ -20,6 +20,7 @@ import {
   Alert,
 } from "@mui/material";
 import Footer from "./Footer";
+import { apiUrl } from "../config/api";
 
 const maroon = "#ff3b30";
 
@@ -80,7 +81,7 @@ export default function RequestBloodForm() {
     setMessage(null);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/request/blood`, {
+      const res = await fetch(apiUrl("/request/blood"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -150,7 +151,7 @@ export default function RequestBloodForm() {
         window.open(url, "_blank");
 
         // const matchRes = await fetch(
-        //   `${import.meta.env.VITE_API_URL}/request/find/match`,
+        //   apiUrl("/request/find/match"),
         //   {
         //     method: "POST",
         //     headers: { "Content-Type": "application/json" },

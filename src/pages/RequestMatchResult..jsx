@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { apiUrl } from "../config/api";
 
 export default function RequestMatchResult() {
   const { requestId, bloodGroup } = useParams();
@@ -23,17 +24,14 @@ export default function RequestMatchResult() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/request/find/match`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              blood_group: bloodGroup,
-              request_id: requestId,
-            }),
-          }
-        );
+        const res = await fetch(apiUrl("/request/find/match"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            blood_group: bloodGroup,
+            request_id: requestId,
+          }),
+        });
 
         const data = await res.json();
         if (data.success) {
@@ -50,7 +48,7 @@ export default function RequestMatchResult() {
 
     const status = answer === "yes" ? "new" : "unsettled";
 
-    await fetch(`${import.meta.env.VITE_API_URL}/request/update/status`, {
+    await fetch(apiUrl("/request/update/status"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ request_id: requestId, status }),

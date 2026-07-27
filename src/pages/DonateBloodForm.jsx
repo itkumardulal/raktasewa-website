@@ -18,6 +18,7 @@ import {
   Alert,
 } from "@mui/material";
 import Footer from "./Footer";
+import { apiUrl } from "../config/api";
 
 const maroon = "#ff3b30";
 
@@ -60,7 +61,7 @@ export default function DonateBloodForm() {
     setMessage(null);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/donors/add`, {
+      const res = await fetch(apiUrl("/donors/add"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
