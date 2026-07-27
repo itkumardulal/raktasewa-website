@@ -40,6 +40,7 @@ const AboutUs = lazy(() => import("../pages/AboutUs"));
 const OurTeam = lazy(() => import("../pages/OurTeam"));
 const BloodGroup = lazy(() => import("../pages/BloodGroup"));
 const Donors = lazy(() => import("../pages/Donors"));
+const DonorProfile = lazy(() => import("../pages/DonorProfile"));
 const DonateBloodForm = lazy(() => import("../pages/DonateBloodForm"));
 const RequestBloodForm = lazy(() => import("../pages/RequestBloodForm"));
 const RequestMatchResult = lazy(() => import("../pages/RequestMatchResult."));
@@ -69,6 +70,7 @@ export default function AppRouter() {
         <Route path="team" element={<OurTeam />} />
         <Route path="blood-group" element={<BloodGroup />} />
         <Route path="recent-donors" element={<Donors />} />
+        <Route path="donors/:id" element={<DonorProfile />} />
         <Route path="donate-blood-form" element={<DonateBloodForm />} />
         <Route path="request-blood-form" element={<RequestBloodForm />} />
         <Route

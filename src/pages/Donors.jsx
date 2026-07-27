@@ -1,5 +1,6 @@
-/*  src/pages/RecentDonors.jsx — real leaderboard data from public APIs */
+/*  src/pages/Donors.jsx — real leaderboard data from public APIs */
 import React, { useEffect, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Container,
   Box,
@@ -39,6 +40,7 @@ function formatDate(value) {
 
 function DonorCard({ donor }) {
   const {
+    id,
     fullname,
     blood_group,
     donation_count,
@@ -47,7 +49,7 @@ function DonorCard({ donor }) {
     last_donation,
   } = donor;
 
-  return (
+  const card = (
     <Paper
       elevation={0}
       sx={{
@@ -57,7 +59,22 @@ function DonorCard({ donor }) {
         textAlign: "center",
         borderRadius: 3,
         border: `1px solid ${brand.line}`,
+        height: "100%",
+        transition: "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
+        cursor: id ? "pointer" : "default",
+        textDecoration: "none",
+        color: "inherit",
+        display: "block",
+        "&:hover": id
+          ? {
+              transform: "translateY(-4px)",
+              borderColor: maroon,
+              boxShadow: `0 12px 28px ${maroon}18`,
+            }
+          : undefined,
       }}
+      component={id ? RouterLink : "div"}
+      to={id ? `/donors/${id}` : undefined}
     >
       <Box
         sx={{
@@ -100,8 +117,18 @@ function DonorCard({ donor }) {
           Joined {formatDate(joined_date)}
         </Typography>
       )}
+      {id ? (
+        <Typography
+          variant="caption"
+          sx={{ mt: 1.5, display: "block", color: maroon, fontWeight: 700 }}
+        >
+          View activity →
+        </Typography>
+      ) : null}
     </Paper>
   );
+
+  return card;
 }
 
 export default function RecentDonors() {
@@ -154,6 +181,7 @@ export default function RecentDonors() {
         sx={{ mb: 3, maxWidth: 480, mx: "auto" }}
       >
         Celebrating people who join and donate to keep our community safe.
+        Tap a donor to see their donation history and activity.
       </Typography>
 
       <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
@@ -195,7 +223,7 @@ export default function RecentDonors() {
         >
           {donors.map((donor, index) => (
             <DonorCard
-              key={`${donor.fullname}-${donor.last_donation || donor.joined_date}-${index}`}
+              key={`${donor.id || donor.fullname}-${donor.last_donation || donor.joined_date}-${index}`}
               donor={donor}
             />
           ))}
