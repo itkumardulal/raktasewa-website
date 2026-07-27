@@ -25,8 +25,6 @@ const team = [
     img: "/team4.jpeg",
   },
   { name: "ANISH B.K", role: "IT", img: "/team5.jpg" },
-  { name: "Man Bahadur Bhandari", role: "IT", img: "/team6.jpg" },
-  { name: "Ajax Alyson", role: "Web Developer", img: "/lead_dev.jpg" },
 ];
 
 export default function OurTeam() {
