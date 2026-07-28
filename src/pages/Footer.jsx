@@ -26,6 +26,7 @@ export default function Footer() {
   ];
   const resources = [
     { to: "/knowledge", label: t("nav.knowledge") },
+    { to: "/how-it-works", label: t("nav.howItWorks") },
     { to: "/blog", label: t("nav.blog") },
     { to: "/blood-group", label: t("nav.bloodGroup") },
     { to: "/faq", label: t("nav.faq") },

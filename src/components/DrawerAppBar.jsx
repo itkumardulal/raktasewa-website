@@ -31,6 +31,7 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import ContactMailRoundedIcon from "@mui/icons-material/ContactMailRounded";
+import RouteRoundedIcon from "@mui/icons-material/RouteRounded";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { brand } from "../constants/brand";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -46,6 +47,7 @@ export default function DrawerAppBar({ children, windowRef }) {
     { label: t("nav.home"), path: "/", icon: <HomeRoundedIcon sx={{ fontSize: 20 }} /> },
     { label: t("nav.about"), path: "/about", icon: <InfoOutlinedIcon sx={{ fontSize: 20 }} /> },
     { label: t("nav.knowledge"), path: "/knowledge", icon: <MenuBookRoundedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.howItWorks"), path: "/how-it-works", icon: <RouteRoundedIcon sx={{ fontSize: 20 }} /> },
     { label: t("nav.blog"), path: "/blog", icon: <ArticleRoundedIcon sx={{ fontSize: 20 }} /> },
     { label: t("nav.donors"), path: "/recent-donors", icon: <VolunteerActivismRoundedIcon sx={{ fontSize: 20 }} /> },
     { label: t("nav.bloodGroup"), path: "/blood-group", icon: <BloodtypeRoundedIcon sx={{ fontSize: 20 }} /> },

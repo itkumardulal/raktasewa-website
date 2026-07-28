@@ -17,6 +17,7 @@ const BlogList = lazy(() => import("../pages/BlogPost"));
 const BlogArticle = lazy(() => import("../pages/BlogArticle"));
 const KnowledgePage = lazy(() => import("../pages/KnowledgePage"));
 const ContactPage = lazy(() => import("../pages/ContactPage"));
+const HowItWorksPage = lazy(() => import("../pages/HowItWorksPage"));
 
 export default function AppRouter() {
   const t = useT();
@@ -51,6 +52,7 @@ export default function AppRouter() {
         <Route path="blog" element={<BlogList />} />
         <Route path="blog/:slug" element={<BlogArticle />} />
         <Route path="knowledge" element={<KnowledgePage />} />
+        <Route path="how-it-works" element={<HowItWorksPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
