@@ -25,6 +25,8 @@ const team = [
     img: "/team4.jpeg",
   },
   { name: "ANISH B.K", role: "IT", img: "/team5.jpg" },
+  { name: "Deepak Phuyal", role: "Team Member", img: "/team8.png" },
+  { name: "Birat Thapa", role: "Team Member", img: "/team9.png" },
 ];
 
 export default function OurTeam() {
@@ -61,16 +63,35 @@ export default function OurTeam() {
           >
             <Box
               sx={{
-                width: 140,
-                height: 140,
+                width: { xs: 100, sm: 140 },
+                height: { xs: 100, sm: 140 },
                 mx: "auto",
-                mb: 2,
+                mb: { xs: 1.25, sm: 2 },
                 borderRadius: "50%",
                 overflow: "hidden",
                 border: `3px solid ${brand.primary}`,
               }}
             >
-              <Avatar src={img} alt={name} sx={{ width: "100%", height: "100%" }} />
+              <Avatar
+                src={img}
+                alt={name}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  fontSize: { xs: "1.75rem", sm: "2.25rem" },
+                  fontWeight: 700,
+                  bgcolor: brand.accentSoft,
+                  color: brand.primary,
+                }}
+              >
+                {name
+                  .split(" ")
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .map((part) => part[0])
+                  .join("")
+                  .toUpperCase()}
+              </Avatar>
             </Box>
 
             <Typography variant="h4" component="h2" sx={{ fontSize: "1.2rem", mb: 0.5 }}>

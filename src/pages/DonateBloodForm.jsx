@@ -20,6 +20,7 @@ import {
 import Footer from "./Footer";
 import { apiUrl } from "../config/api";
 import { brand } from "../constants/brand";
+import { formPaperSx } from "../constants/ui";
 import { usePersistentForm } from "../hooks/usePersistentForm";
 
 const maroon = brand.primary;
@@ -109,16 +110,12 @@ export default function DonateBloodForm() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ my: 10 }}>
+    <Container maxWidth="md" sx={{ my: { xs: 3, sm: 6, md: 8 }, px: { xs: 2, sm: 3 } }}>
       <Paper
         elevation={0}
         sx={{
-          mx: "auto",
+          ...formPaperSx,
           maxWidth: 480,
-          borderRadius: 3,
-          p: { xs: 3, sm: 5 },
-          border: `1px solid ${brand.line}`,
-          boxShadow: "0 12px 40px rgba(26, 21, 35, 0.06)",
         }}
       >
         {/* Success or Error Message */}
@@ -131,12 +128,12 @@ export default function DonateBloodForm() {
         <Box component="form" onSubmit={handleSubmit}>
           <Typography
             variant="h5"
-            sx={{ mb: 4, fontWeight: 700, textAlign: "center" }}
+            sx={{ mb: { xs: 2.5, sm: 3.5 }, fontWeight: 700, textAlign: "center", fontSize: { xs: "1.2rem", sm: "1.5rem" } }}
           >
             Please send us your details
           </Typography>
 
-          <Stack spacing={3}>
+          <Stack spacing={{ xs: 2, sm: 2.5 }}>
             <TextField
               placeholder="Full Name"
               label="Full Name"

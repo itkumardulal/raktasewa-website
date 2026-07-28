@@ -61,7 +61,7 @@ export default function BlogPage() {
                       bgcolor: brand.accentSoft,
                     }}
                   />
-                  <Box sx={{ p: { xs: 2.5, sm: 3.25 }, flex: 1, display: "flex", flexDirection: "column" }}>
+                  <Box sx={{ p: { xs: 1.5, sm: 2.25, md: 2.75 }, flex: 1, display: "flex", flexDirection: "column" }}>
                     <Chip
                       size="small"
                       label={post.category[lang] || post.category.en}

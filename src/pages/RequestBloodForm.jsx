@@ -22,6 +22,7 @@ import {
 import Footer from "./Footer";
 import { apiUrl } from "../config/api";
 import { brand } from "../constants/brand";
+import { formPaperSx } from "../constants/ui";
 import { usePersistentForm } from "../hooks/usePersistentForm";
 
 const maroon = brand.primary;
@@ -244,16 +245,10 @@ export default function RequestBloodForm() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ my: 8 }}>
+    <Container maxWidth="lg" sx={{ my: { xs: 3, sm: 5, md: 7 }, px: { xs: 2, sm: 3 } }}>
       <Paper
         elevation={0}
-        sx={{
-          mx: "auto",
-          borderRadius: 3,
-          p: { xs: 3, sm: 5 },
-          border: `1px solid ${brand.line}`,
-          boxShadow: "0 12px 40px rgba(26, 21, 35, 0.06)",
-        }}
+        sx={formPaperSx}
       >
         {/* ✅ Message Box */}
         {message && (
@@ -265,7 +260,7 @@ export default function RequestBloodForm() {
         <Box component="form" onSubmit={handleSubmit}>
           <Typography
             variant="h5"
-            sx={{ mb: 4, fontWeight: 700, textAlign: "center" }}
+            sx={{ mb: { xs: 2.5, sm: 3.5 }, fontWeight: 700, textAlign: "center", fontSize: { xs: "1.2rem", sm: "1.5rem" } }}
           >
             Request Blood Form
           </Typography>
@@ -275,13 +270,13 @@ export default function RequestBloodForm() {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              gap: 3,
+              gap: { xs: 2, sm: 2.5, md: 3 },
               flexDirection: { xs: "column", md: "row" },
             }}
           >
             {/* LEFT COLUMN */}
-            <Box sx={{ flex: 1, minWidth: 280 }}>
-              <Typography variant="subtitle1" fontWeight={600} mb={2}>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Typography variant="subtitle1" fontWeight={600} mb={{ xs: 1.25, sm: 2 }}>
                 1. Patient Information
               </Typography>
 
@@ -346,8 +341,8 @@ export default function RequestBloodForm() {
             </Box>
 
             {/* RIGHT COLUMN */}
-            <Box sx={{ flex: 1, minWidth: 280 }}>
-              <Typography variant="subtitle1" fontWeight={600} mb={2}>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Typography variant="subtitle1" fontWeight={600} mb={{ xs: 1.25, sm: 2 }}>
                 2. Request Details
               </Typography>
 
@@ -443,11 +438,11 @@ export default function RequestBloodForm() {
               />
             </Stack>
 
-            <Typography variant="subtitle1" fontWeight={600} sx={{ mt: 4 }}>
+            <Typography variant="subtitle1" fontWeight={600} sx={{ mt: { xs: 2.5, sm: 4 } }}>
               4. Additional Optional Fields
             </Typography>
 
-            <Stack spacing={2} sx={{ mt: 2 }}>
+            <Stack spacing={2} sx={{ mt: { xs: 1.25, sm: 2 } }}>
               <FormControl fullWidth>
                 <InputLabel>Willing to Replace Blood Later?</InputLabel>
                 <Select
@@ -475,7 +470,7 @@ export default function RequestBloodForm() {
           </Box>
 
           {/* Agreement & Submit */}
-          <Stack spacing={2} sx={{ mt: 4 }}>
+          <Stack spacing={2} sx={{ mt: { xs: 2.5, sm: 4 } }}>
             <FormControlLabel
               control={
                 <Checkbox

@@ -43,8 +43,8 @@ export const en = {
     unsettled: "Unsettled Requests",
     settled: "Settled Requests",
     donors: "Total Donors",
-    basedOn: "based on number of blood supply requests",
-    lastUpdated: "Last updated on",
+    basedOn: "Live network data",
+    lastUpdated: "Updated",
     failed: "Failed to load statistics.",
   },
   about: {

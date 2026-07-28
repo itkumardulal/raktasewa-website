@@ -321,27 +321,10 @@ export default function Home() {
           sx={{
             display: "flex",
             width: "100%",
+            flexWrap: "wrap",
+            justifyContent: "center",
             alignItems: "stretch",
-            mx: { xs: -0.5, sm: 0 },
-            px: { xs: 0.5, sm: 0 },
-            "@media (max-width: 1023.95px)": {
-              flexWrap: "nowrap",
-              justifyContent: "flex-start",
-              gap: { xs: "10px", sm: "16px" },
-              overflowX: "auto",
-              WebkitOverflowScrolling: "touch",
-              scrollSnapType: "x mandatory",
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-              "&::-webkit-scrollbar": { display: "none" },
-              pb: 0.5,
-            },
-            "@media (min-width: 1024px)": {
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: 3,
-              overflowX: "visible",
-            },
+            gap: { xs: 1, sm: 2, md: 3 },
           }}
         >
           {loading ? (
@@ -353,18 +336,13 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  "@media (max-width: 599.95px)": {
-                    flex: "0 0 156px",
-                    scrollSnapAlign: "start",
+                  flex: {
+                    xs: "1 1 calc(33.333% - 8px)",
+                    sm: "0 1 180px",
+                    md: "0 1 220px",
                   },
-                  "@media (min-width: 600px) and (max-width: 1023.95px)": {
-                    flex: "0 0 200px",
-                    scrollSnapAlign: "start",
-                  },
-                  "@media (min-width: 1024px)": {
-                    flex: "0 1 auto",
-                    flexBasis: "25%",
-                  },
+                  maxWidth: { xs: "calc(33.333% - 6px)", sm: 200, md: 240 },
+                  minWidth: 0,
                 }}
               >
                 <StatDonut
@@ -552,7 +530,7 @@ export default function Home() {
         <Grid container spacing={3}>
           {impactCards.map((card) => (
             <Grid key={card.label} size={{ xs: 6, md: 4 }}>
-              <Paper elevation={0} sx={{ ...cardSx, textAlign: "center", py: { xs: 3, sm: 4 } }}>
+              <Paper elevation={0} sx={{ ...cardSx, textAlign: "center", py: { xs: 2, sm: 3 } }}>
                 <Typography
                   sx={{
                     fontFamily: '"Manrope", "Inter", sans-serif',
@@ -665,7 +643,7 @@ export default function Home() {
                       bgcolor: brand.accentSoft,
                     }}
                   />
-                  <Box sx={{ p: { xs: 2.5, sm: 3.25 } }}>
+                  <Box sx={{ p: { xs: 1.5, sm: 2.25, md: 2.75 } }}>
                     <Chip size="small" label={post.category[lang] || post.category.en} sx={{ mb: 1.5 }} />
                     <Typography variant="h4" component="h3" sx={{ fontSize: "1.15rem", mb: 1.5 }}>
                       {post.title[lang] || post.title.en}
@@ -771,7 +749,7 @@ export default function Home() {
 
       {/* Newsletter */}
       <Container component="section" maxWidth="sm" className="section-pad">
-        <Paper elevation={0} sx={{ ...cardSx, textAlign: "center", p: { xs: 3, sm: 4 } }}>
+        <Paper elevation={0} sx={{ ...cardSx, textAlign: "center" }}>
           <SectionTitle
             eyebrow={t("newsletter.eyebrow")}
             title={t("newsletter.title")}

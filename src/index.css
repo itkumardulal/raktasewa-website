@@ -93,8 +93,14 @@ img {
   border: 1px solid var(--brand-line);
   border-radius: var(--radius);
   box-shadow: var(--card-shadow);
-  padding: 26px;
+  padding: 22px;
   transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+@media (max-width: 600px) {
+  .ds-card {
+    padding: 12px;
+  }
 }
 
 .ds-card:hover {

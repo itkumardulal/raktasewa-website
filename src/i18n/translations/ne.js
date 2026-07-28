@@ -43,8 +43,8 @@ export const ne = {
     unsettled: "अपरिष्कृत अनुरोध",
     settled: "सफल अनुरोध",
     donors: "कुल रक्तदाता",
-    basedOn: "रक्त आपूर्ति अनुरोध संख्यामा आधारित",
-    lastUpdated: "अन्तिम अद्यावधिक",
+    basedOn: "लाइभ तथ्याङ्क",
+    lastUpdated: "अद्यावधिक",
     failed: "तथ्याङ्क लोड गर्न सकिएन।",
   },
   about: {

@@ -77,7 +77,7 @@ function DonorCard({ donor }) {
       sx={{
         flexBasis: { xs: "100%", sm: "47%", md: "30%" },
         maxWidth: 360,
-        p: { xs: 2.5, sm: 3.25 },
+        p: { xs: 1.5, sm: 2.25, md: 2.75 },
         textAlign: "center",
         borderRadius: `${brand.radius}px`,
         border: `1px solid ${brand.line}`,
@@ -101,10 +101,10 @@ function DonorCard({ donor }) {
     >
       <Box
         sx={{
-          width: 140,
-          height: 140,
+          width: { xs: 96, sm: 120, md: 140 },
+          height: { xs: 96, sm: 120, md: 140 },
           mx: "auto",
-          mb: 2,
+          mb: { xs: 1.25, sm: 2 },
           borderRadius: "50%",
           overflow: "hidden",
           border: `4px solid ${typeof tier.avatarRing === "string" && !tier.avatarRing.includes("gradient") ? tier.avatarRing : maroon}`,

@@ -3,21 +3,21 @@ import { useTheme } from "@mui/material/styles";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { brand } from "../constants/brand";
 
-/** Live snapshot card — compact on mobile, full on desktop */
+/** Live snapshot card — always compact & centered-friendly on mobile */
 export default function StatDonut({
   label,
   value,
   updatedAt = "April 26, 2025",
-  basedOnLabel = "based on number of blood supply requests",
-  lastUpdatedLabel = "Last updated on",
+  basedOnLabel = "Live network data",
+  lastUpdatedLabel = "Updated",
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
-  const chartSize = isMobile ? 88 : isTablet ? 110 : 132;
-  const innerRadius = isMobile ? 26 : isTablet ? 32 : 36;
-  const outerRadius = isMobile ? 38 : isTablet ? 48 : 56;
+  const chartSize = isMobile ? 72 : isTablet ? 100 : 128;
+  const innerRadius = isMobile ? 22 : isTablet ? 30 : 36;
+  const outerRadius = isMobile ? 32 : isTablet ? 44 : 54;
 
   const data = [
     { id: 0, value, color: brand.primary },
@@ -29,14 +29,18 @@ export default function StatDonut({
       elevation={0}
       sx={{
         textAlign: "center",
-        p: { xs: 1.5, sm: 2, md: 2.75 },
-        borderRadius: { xs: "14px", md: `${brand.radius}px` },
+        p: { xs: 1, sm: 1.75, md: 2.5 },
+        borderRadius: { xs: "12px", md: `${brand.radius}px` },
         border: `1px solid ${brand.line}`,
         bgcolor: brand.white,
         width: "100%",
-        maxWidth: { xs: 156, sm: 200, md: 240 },
-        minHeight: { xs: "auto", md: 280 },
+        height: "100%",
+        maxWidth: { xs: "100%", sm: 200, md: 240 },
+        mx: "auto",
         boxShadow: brand.cardShadow,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         transition: "transform 300ms ease, box-shadow 300ms ease",
         "&:hover": {
           transform: { xs: "none", md: "translateY(-4px)" },
@@ -49,9 +53,13 @@ export default function StatDonut({
           fontWeight: 700,
           color: brand.ink,
           letterSpacing: "-0.01em",
-          fontSize: { xs: "0.8rem", sm: "0.875rem", md: "0.9375rem" },
-          lineHeight: 1.25,
+          fontSize: { xs: "0.7rem", sm: "0.85rem", md: "0.9375rem" },
+          lineHeight: 1.2,
           px: 0.25,
+          minHeight: { xs: "2.4em", sm: "auto" },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         {label}
@@ -60,15 +68,15 @@ export default function StatDonut({
       <Typography
         sx={{
           display: "block",
-          mb: { xs: 0.75, md: 1.25 },
-          mt: 0.35,
+          mb: { xs: 0.5, md: 1 },
+          mt: 0.25,
           color: brand.muted,
-          fontSize: { xs: "0.65rem", sm: "0.72rem", md: "0.8rem" },
-          lineHeight: 1.35,
+          fontSize: { xs: "0.58rem", sm: "0.7rem", md: "0.78rem" },
+          lineHeight: 1.25,
           fontWeight: 500,
         }}
       >
-        {lastUpdatedLabel}: {updatedAt}
+        {lastUpdatedLabel} {updatedAt}
       </Typography>
 
       <Box
@@ -77,6 +85,7 @@ export default function StatDonut({
           width: chartSize,
           height: chartSize,
           mx: "auto",
+          flexShrink: 0,
         }}
       >
         <PieChart
@@ -104,7 +113,7 @@ export default function StatDonut({
             pointerEvents: "none",
             fontFamily: '"Manrope", "Inter", sans-serif',
             fontWeight: 800,
-            fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
+            fontSize: { xs: "1.1rem", sm: "1.4rem", md: "1.75rem" },
             letterSpacing: "-0.04em",
             color: brand.primary,
             lineHeight: 1,
@@ -114,12 +123,13 @@ export default function StatDonut({
         </Typography>
       </Box>
 
+      {/* Short caption — hidden on very small screens to save space */}
       <Typography
         sx={{
-          display: "block",
-          mt: { xs: 0.75, md: 1.25 },
+          display: { xs: "none", sm: "block" },
+          mt: { sm: 0.75, md: 1.25 },
           color: brand.muted,
-          fontSize: { xs: "0.62rem", sm: "0.72rem", md: "0.8125rem" },
+          fontSize: { sm: "0.68rem", md: "0.8rem" },
           lineHeight: 1.35,
           fontWeight: 500,
           px: 0.25,

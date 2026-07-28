@@ -65,7 +65,7 @@ export default function RequestMatchResult() {
   return (
     <Box
       sx={{
-        p: 4,
+        p: { xs: 2, sm: 3, md: 4 },
         maxWidth: 800,
         mx: "auto",
         textAlign: "center",
@@ -103,12 +103,12 @@ export default function RequestMatchResult() {
                 key={donor.id}
                 elevation={3}
                 sx={{
-                  p: 2,
+                  p: { xs: 1.5, sm: 2 },
                   textAlign: "left",
                   border: "1px solid #ccc",
                   borderRadius: 2,
                   width: { xs: "100%", sm: "45%", md: "60%" },
-                  minWidth: 260,
+                  minWidth: 0,
                   maxWidth: 350,
                   display: "flex",
                   flexDirection: "column",

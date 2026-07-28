@@ -261,7 +261,7 @@ export default function BloodGroup() {
         <Paper
           elevation={0}
           sx={{
-            p: { xs: 2.5, md: 3.5 },
+            p: { xs: 1.5, sm: 2.25, md: 3 },
             mb: 3,
             borderRadius: 3,
             border: `1px solid ${brand.line}`,

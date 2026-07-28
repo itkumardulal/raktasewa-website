@@ -50,7 +50,7 @@ export default function DonorRecognitionPanel({
         {/* Tier progress */}
         <Box
           sx={{
-            p: 2,
+            p: { xs: 1.5, sm: 2 },
             borderRadius: 2,
             border: `1px solid ${brand.line}`,
             bgcolor: brand.surface,
@@ -98,7 +98,7 @@ export default function DonorRecognitionPanel({
         {/* Safe donation gap */}
         <Box
           sx={{
-            p: 2,
+            p: { xs: 1.5, sm: 2 },
             borderRadius: 2,
             border: `1px solid ${brand.line}`,
             bgcolor: eligibility.eligibleNow ? "#ECFDF5" : brand.accentSoft,

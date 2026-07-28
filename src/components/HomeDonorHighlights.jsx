@@ -114,11 +114,11 @@ function HighlightColumn({ title, icon, donors, variant, seeMoreTo, seeMoreLabel
       sx={{
         ...cardSx,
         height: "100%",
-        p: { xs: 2.5, sm: 3 },
+        p: { xs: 1.75, sm: 2.25 },
         "&:hover": { transform: "none", boxShadow: brand.cardShadow },
       }}
     >
-      <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
+      <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
         <Box
           sx={{
             width: 36,
