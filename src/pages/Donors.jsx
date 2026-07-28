@@ -1,6 +1,6 @@
 /*  src/pages/Donors.jsx — real leaderboard data from public APIs */
 import React, { useEffect, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useSearchParams } from "react-router-dom";
 import {
   Container,
   Box,
@@ -15,6 +15,13 @@ import { brand } from "../constants/brand";
 import { apiUrl } from "../config/api";
 import { useLanguage } from "../i18n/LanguageContext";
 import SectionTitle from "../components/SectionTitle";
+import DonorTierBadge from "../components/DonorTierBadge";
+import DonorTierRoadmap from "../components/DonorTierRoadmap";
+import { getDonorTier } from "../utils/donorTier";
+import {
+  formatEligibilityDate,
+  getDonationEligibility,
+} from "../utils/donorEligibility";
 
 const maroon = brand.primary;
 
@@ -29,6 +36,12 @@ const TABS = [
   { key: "repeat", label: "Repeat", endpoint: "/public/donors/repeat" },
 ];
 
+function tabIndexFromKey(key) {
+  if (!key) return 0;
+  const index = TABS.findIndex((tab) => tab.key === key);
+  return index >= 0 ? index : 0;
+}
+
 function formatDate(value) {
   if (!value) return null;
   const d = new Date(value);
@@ -41,6 +54,7 @@ function formatDate(value) {
 }
 
 function DonorCard({ donor }) {
+  const { t, lang } = useLanguage();
   const {
     id,
     fullname,
@@ -50,6 +64,12 @@ function DonorCard({ donor }) {
     joined_date,
     last_donation,
   } = donor;
+
+  const donations = donation_count ?? 0;
+  const tier = getDonorTier(donations);
+  const eligibility = last_donation
+    ? getDonationEligibility(last_donation, null)
+    : null;
 
   const card = (
     <Paper
@@ -87,7 +107,12 @@ function DonorCard({ donor }) {
           mb: 2,
           borderRadius: "50%",
           overflow: "hidden",
-          border: `4px solid ${maroon}`,
+          border: `4px solid ${typeof tier.avatarRing === "string" && !tier.avatarRing.includes("gradient") ? tier.avatarRing : maroon}`,
+          ...(tier.premium
+            ? {
+                boxShadow: "0 0 0 2px rgba(167, 139, 250, 0.35)",
+              }
+            : null),
         }}
       >
         <Avatar
@@ -97,16 +122,27 @@ function DonorCard({ donor }) {
         />
       </Box>
 
-      <Typography variant="subtitle1" fontWeight={600}>
-        {fullname || "Donor"}
-      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 1,
+          mb: 1,
+        }}
+      >
+        <Typography variant="subtitle1" fontWeight={600}>
+          {fullname || "Donor"}
+        </Typography>
+        <DonorTierBadge donationCount={donations} size="small" />
+      </Box>
 
       <Typography variant="body2" color="text.secondary">
         Blood Type&nbsp;•&nbsp;<b>{blood_group || "—"}</b>
       </Typography>
 
       <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-        Donations&nbsp;•&nbsp;<b>{donation_count ?? 0}</b>
+        Donations&nbsp;•&nbsp;<b>{donations}</b>
         &nbsp;|&nbsp;Score&nbsp;•&nbsp;<b>{score ?? 0}</b>
       </Typography>
 
@@ -115,6 +151,28 @@ function DonorCard({ donor }) {
           Last donation {formatDate(last_donation)}
         </Typography>
       )}
+      {eligibility && eligibility.status !== "no_record" ? (
+        <Typography
+          variant="caption"
+          display="block"
+          sx={{
+            mt: 0.75,
+            lineHeight: 1.45,
+            color: eligibility.eligibleNow ? "#166534" : brand.muted,
+            fontWeight: 600,
+          }}
+        >
+          {eligibility.eligibleNow
+            ? t("donorTiers.cardEligibleNow")
+            : String(t("donorTiers.cardEligibleOn")).replace(
+                "{date}",
+                formatEligibilityDate(eligibility.nextDate, lang)
+              )}
+          {!eligibility.eligibleNow && eligibility.daysRemaining > 0
+            ? ` · ${String(t("donorTiers.cardDaysLeft")).replace("{days}", String(eligibility.daysRemaining))}`
+            : null}
+        </Typography>
+      ) : null}
       {joined_date && (
         <Typography variant="caption" color="text.secondary" display="block">
           Joined {formatDate(joined_date)}
@@ -136,10 +194,15 @@ function DonorCard({ donor }) {
 
 export default function RecentDonors() {
   const { t } = useLanguage();
-  const [tab, setTab] = useState(0);
+  const [searchParams] = useSearchParams();
+  const [tab, setTab] = useState(() => tabIndexFromKey(searchParams.get("tab")));
   const [donors, setDonors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setTab(tabIndexFromKey(searchParams.get("tab")));
+  }, [searchParams]);
 
   useEffect(() => {
     let cancelled = false;
@@ -183,6 +246,8 @@ export default function RecentDonors() {
         title={t("donors.title")}
         subtitle={t("donors.subtitle")}
       />
+
+      <DonorTierRoadmap />
 
       <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
         <Tabs

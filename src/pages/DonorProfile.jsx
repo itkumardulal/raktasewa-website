@@ -20,6 +20,9 @@ import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlin
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import { brand } from "../constants/brand";
 import { apiUrl } from "../config/api";
+import DonorTierBadge from "../components/DonorTierBadge";
+import DonorRecognitionPanel from "../components/DonorRecognitionPanel";
+import { getDonorTier } from "../utils/donorTier";
 
 function formatDate(value) {
   if (!value) return "—";
@@ -145,6 +148,9 @@ export default function DonorProfile() {
     );
   }
 
+  const totalDonations = stats?.total_donations ?? donor.donation_count ?? 0;
+  const tier = getDonorTier(totalDonations);
+
   return (
     <Box
       sx={{
@@ -186,13 +192,30 @@ export default function DonorProfile() {
               sx={{
                 width: 120,
                 height: 120,
-                border: `4px solid ${brand.primary}`,
+                border: `4px solid ${
+                  typeof tier.avatarRing === "string" && !tier.avatarRing.includes("gradient")
+                    ? tier.avatarRing
+                    : brand.primary
+                }`,
+                ...(tier.premium
+                  ? { boxShadow: "0 0 0 3px rgba(167, 139, 250, 0.35)" }
+                  : null),
               }}
             />
             <Box sx={{ textAlign: { xs: "center", sm: "left" }, flex: 1 }}>
-              <Typography variant="h4" sx={{ mb: 0.5 }}>
-                {donor.fullname || "Donor"}
-              </Typography>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={1.5}
+                alignItems={{ xs: "center", sm: "center" }}
+                flexWrap="wrap"
+                useFlexGap
+                sx={{ mb: 1 }}
+              >
+                <Typography variant="h4" sx={{ mb: 0 }}>
+                  {donor.fullname || "Donor"}
+                </Typography>
+                <DonorTierBadge donationCount={totalDonations} size="medium" />
+              </Stack>
               <Stack
                 direction="row"
                 spacing={1}
@@ -227,7 +250,7 @@ export default function DonorProfile() {
             <StatTile
               icon={<FavoriteBorderIcon fontSize="small" />}
               label="Total donations"
-              value={stats?.total_donations ?? donor.donation_count ?? 0}
+              value={totalDonations}
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
@@ -252,6 +275,12 @@ export default function DonorProfile() {
             />
           </Grid>
         </Grid>
+
+        <DonorRecognitionPanel
+          donationCount={totalDonations}
+          lastDonation={stats?.last_donation || donor.last_donation}
+          gender={donor.gender}
+        />
 
         <Paper
           elevation={0}

@@ -35,8 +35,6 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 import { brand } from "../constants/brand";
 import { useLanguage } from "../i18n/LanguageContext";
 
-const drawerWidth = 300;
-
 export default function DrawerAppBar({ children, windowRef }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const toggleDrawer = () => setMobileOpen((open) => !open);
@@ -45,15 +43,15 @@ export default function DrawerAppBar({ children, windowRef }) {
   const { t, lang, setLang } = useLanguage();
 
   const navItems = [
-    { label: t("nav.home"), path: "/", icon: <HomeRoundedIcon fontSize="small" /> },
-    { label: t("nav.about"), path: "/about", icon: <InfoOutlinedIcon fontSize="small" /> },
-    { label: t("nav.knowledge"), path: "/knowledge", icon: <MenuBookRoundedIcon fontSize="small" /> },
-    { label: t("nav.blog"), path: "/blog", icon: <ArticleRoundedIcon fontSize="small" /> },
-    { label: t("nav.donors"), path: "/recent-donors", icon: <VolunteerActivismRoundedIcon fontSize="small" /> },
-    { label: t("nav.bloodGroup"), path: "/blood-group", icon: <BloodtypeRoundedIcon fontSize="small" /> },
-    { label: t("nav.faq"), path: "/faq", icon: <HelpOutlineRoundedIcon fontSize="small" /> },
-    { label: t("nav.contact"), path: "/contact", icon: <ContactMailRoundedIcon fontSize="small" /> },
-    { label: t("nav.team"), path: "/team", icon: <GroupsRoundedIcon fontSize="small" /> },
+    { label: t("nav.home"), path: "/", icon: <HomeRoundedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.about"), path: "/about", icon: <InfoOutlinedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.knowledge"), path: "/knowledge", icon: <MenuBookRoundedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.blog"), path: "/blog", icon: <ArticleRoundedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.donors"), path: "/recent-donors", icon: <VolunteerActivismRoundedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.bloodGroup"), path: "/blood-group", icon: <BloodtypeRoundedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.faq"), path: "/faq", icon: <HelpOutlineRoundedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.contact"), path: "/contact", icon: <ContactMailRoundedIcon sx={{ fontSize: 20 }} /> },
+    { label: t("nav.team"), path: "/team", icon: <GroupsRoundedIcon sx={{ fontSize: 20 }} /> },
   ];
 
   const container =
@@ -74,18 +72,29 @@ export default function DrawerAppBar({ children, windowRef }) {
       onChange={(_e, next) => next && setLang(next)}
       aria-label={t("nav.language")}
       sx={{
-        bgcolor: brand.white,
-        border: `1px solid ${brand.line}`,
+        bgcolor: "transparent",
+        border: "none",
+        gap: 0.5,
+        "& .MuiToggleButtonGroup-grouped": {
+          border: "none !important",
+          borderRadius: "6px !important",
+          mx: 0,
+        },
         "& .MuiToggleButton-root": {
           px: 1,
-          py: 0.25,
-          fontSize: 12,
+          py: 0.35,
+          minWidth: 36,
+          fontSize: 11,
           fontWeight: 700,
-          border: "none",
+          lineHeight: 1.2,
           color: brand.muted,
+          textTransform: "none",
           "&.Mui-selected": {
             bgcolor: brand.accentSoft,
             color: brand.primary,
+          },
+          "&:hover": {
+            bgcolor: "rgba(0,0,0,0.04)",
           },
         },
       }}
@@ -101,26 +110,36 @@ export default function DrawerAppBar({ children, windowRef }) {
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: "rgba(250, 250, 250, 0.92)",
+          bgcolor: brand.white,
           color: brand.ink,
-          backdropFilter: "blur(14px)",
           borderBottom: `1px solid ${brand.line}`,
+          boxShadow: "none",
         }}
       >
-        <Toolbar sx={{ gap: 1, minHeight: { xs: 64, sm: 72 } }}>
+        <Toolbar
+          disableGutters
+          sx={{
+            gap: 0.5,
+            minHeight: { xs: 52, sm: 56 } ,
+            px: { xs: 1, sm: 2 },
+          }}
+        >
           <IconButton
             color="inherit"
             edge="start"
             onClick={toggleDrawer}
             aria-label={t("nav.menu")}
+            size="small"
             sx={{
-              mr: 0.5,
-              display: { xs: "inline-flex", md: "none" },
-              border: `1px solid ${brand.line}`,
-              borderRadius: 2,
+              display: { xs: "inline-flex", lg: "none" },
+              border: "none",
+              borderRadius: 1,
+              p: 1,
+              color: brand.ink,
+              "&:hover": { bgcolor: "rgba(0,0,0,0.04)" },
             }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ fontSize: 22 }} />
           </IconButton>
 
           <Box
@@ -129,7 +148,7 @@ export default function DrawerAppBar({ children, windowRef }) {
             sx={{
               display: "flex",
               alignItems: "center",
-              gap: 1.25,
+              gap: 1,
               color: "inherit",
               textDecoration: "none",
               flexGrow: 1,
@@ -141,38 +160,33 @@ export default function DrawerAppBar({ children, windowRef }) {
               src="/logo.png"
               alt={`${t("brand.name")} (${t("brand.nameNp")})`}
               sx={{
-                height: 44,
-                width: 44,
-                borderRadius: "50%",
+                height: { xs: 32, sm: 36 },
+                width: { xs: 32, sm: 36 },
                 objectFit: "contain",
-                bgcolor: brand.white,
-                border: `1px solid ${brand.line}`,
                 flexShrink: 0,
-                p: 0.35,
               }}
             />
             <Box sx={{ minWidth: 0 }}>
               <Typography
-                variant="h6"
                 sx={{
                   fontFamily: '"Manrope", "Inter", sans-serif',
                   fontWeight: 700,
-                  fontSize: { xs: "0.95rem", sm: "1.15rem" },
-                  lineHeight: 1.15,
-                  color: brand.primary,
+                  fontSize: { xs: "0.875rem", sm: "1rem" },
+                  lineHeight: 1.2,
+                  color: brand.ink,
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                 }}
               >
-                {t("brand.name")} · {t("brand.nameNp")}
+                {t("brand.name")}
               </Typography>
               <Typography
-                variant="caption"
                 sx={{
                   display: { xs: "none", sm: "block" },
                   color: brand.muted,
-                  letterSpacing: "0.02em",
+                  fontSize: "0.7rem",
+                  lineHeight: 1.2,
                 }}
               >
                 {t("brand.tagline")}
@@ -180,7 +194,15 @@ export default function DrawerAppBar({ children, windowRef }) {
             </Box>
           </Box>
 
-          <Box sx={{ display: { xs: "none", lg: "flex" }, gap: 0.25, flexWrap: "wrap", justifyContent: "flex-end", maxWidth: 560 }}>
+          <Box
+            sx={{
+              display: { xs: "none", lg: "flex" },
+              gap: 0,
+              flexWrap: "wrap",
+              justifyContent: "flex-end",
+              maxWidth: 560,
+            }}
+          >
             {navItems.slice(0, 6).map(({ label, path }) => {
               const active = isActive(path);
               return (
@@ -189,14 +211,21 @@ export default function DrawerAppBar({ children, windowRef }) {
                   component={RouterLink}
                   to={path}
                   size="small"
+                  disableElevation
                   sx={{
-                    color: active ? brand.primary : brand.ink,
-                    bgcolor: active ? "rgba(139, 21, 56, 0.08)" : "transparent",
+                    color: active ? brand.primary : brand.body,
+                    bgcolor: "transparent",
+                    borderRadius: 1,
                     px: 1.25,
+                    minHeight: 36,
                     minWidth: 0,
+                    fontSize: "0.8125rem",
+                    fontWeight: active ? 700 : 500,
+                    boxShadow: "none",
                     "&:hover": {
-                      bgcolor: "rgba(139, 21, 56, 0.1)",
+                      bgcolor: "rgba(0,0,0,0.04)",
                       color: brand.primary,
+                      transform: "none",
                     },
                   }}
                 >
@@ -207,20 +236,6 @@ export default function DrawerAppBar({ children, windowRef }) {
           </Box>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>{LangToggle}</Box>
-
-          <IconButton
-            color="inherit"
-            edge="start"
-            onClick={toggleDrawer}
-            aria-label={t("nav.menu")}
-            sx={{
-              display: { xs: "none", md: "inline-flex", lg: "none" },
-              border: `1px solid ${brand.line}`,
-              borderRadius: 2,
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -230,34 +245,35 @@ export default function DrawerAppBar({ children, windowRef }) {
         onClose={closeDrawer}
         variant="temporary"
         ModalProps={{ keepMounted: true }}
-        transitionDuration={{ enter: 280, exit: 220 }}
+        transitionDuration={{ enter: 220, exit: 180 }}
         sx={{
           display: { xs: "block", lg: "none" },
           "& .MuiBackdrop-root": {
-            backgroundColor: "rgba(26, 21, 35, 0.45)",
-            backdropFilter: "blur(4px)",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
           },
           "& .MuiDrawer-paper": {
-            width: "min(86vw, 320px)",
+            width: "min(82vw, 300px)",
             boxSizing: "border-box",
             border: "none",
-            background: brand.white,
-            boxShadow: "8px 0 40px rgba(15, 23, 42, 0.12)",
+            borderRadius: 0,
+            bgcolor: brand.white,
+            boxShadow: "2px 0 16px rgba(0,0,0,0.12)",
             display: "flex",
             flexDirection: "column",
           },
         }}
       >
+        {/* Flat header — Facebook-like workspace */}
         <Box
           sx={{
-            px: 2.5,
-            pt: 2.5,
-            pb: 2,
+            px: 1.5,
+            py: 1.25,
             display: "flex",
-            alignItems: "flex-start",
-            gap: 1.5,
-            background: `linear-gradient(135deg, ${brand.primaryDark}, ${brand.primary})`,
-            color: brand.white,
+            alignItems: "center",
+            gap: 1,
+            borderBottom: `1px solid ${brand.line}`,
+            bgcolor: brand.white,
+            minHeight: 52,
           }}
         >
           <Box
@@ -265,21 +281,25 @@ export default function DrawerAppBar({ children, windowRef }) {
             src="/logo.png"
             alt=""
             sx={{
-              width: 48,
-              height: 48,
-              borderRadius: "50%",
+              width: 34,
+              height: 34,
               objectFit: "contain",
-              bgcolor: brand.white,
-              border: "2px solid rgba(255,255,255,0.85)",
               flexShrink: 0,
-              p: 0.35,
             }}
           />
-          <Box sx={{ flex: 1, minWidth: 0, pt: 0.25 }}>
-            <Typography sx={{ fontFamily: '"Manrope", "Inter", sans-serif', fontWeight: 700, fontSize: "1.05rem", lineHeight: 1.2 }}>
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Typography
+              sx={{
+                fontFamily: '"Manrope", "Inter", sans-serif',
+                fontWeight: 700,
+                fontSize: "0.9rem",
+                lineHeight: 1.2,
+                color: brand.ink,
+              }}
+            >
               {t("brand.name")}
             </Typography>
-            <Typography variant="caption" sx={{ opacity: 0.85, display: "block", mt: 0.5 }}>
+            <Typography sx={{ fontSize: "0.7rem", color: brand.muted, lineHeight: 1.2 }}>
               {t("nav.menu")}
             </Typography>
           </Box>
@@ -287,55 +307,118 @@ export default function DrawerAppBar({ children, windowRef }) {
             onClick={closeDrawer}
             aria-label={t("nav.close")}
             size="small"
-            sx={{ color: brand.white, bgcolor: "rgba(255,255,255,0.12)", "&:hover": { bgcolor: "rgba(255,255,255,0.22)" } }}
+            sx={{
+              color: brand.muted,
+              border: "none",
+              borderRadius: 1,
+              p: 0.75,
+              "&:hover": { bgcolor: "rgba(0,0,0,0.04)", color: brand.ink },
+            }}
           >
-            <CloseRoundedIcon fontSize="small" />
+            <CloseRoundedIcon sx={{ fontSize: 20 }} />
           </IconButton>
         </Box>
 
-        <Box sx={{ px: 2, py: 1.5 }}>{LangToggle}</Box>
+        <Box
+          sx={{
+            px: 1.5,
+            py: 1,
+            borderBottom: `1px solid ${brand.line}`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography sx={{ fontSize: "0.75rem", color: brand.muted, fontWeight: 600 }}>
+            {t("nav.language")}
+          </Typography>
+          {LangToggle}
+        </Box>
 
-        <Box sx={{ flex: 1, overflowY: "auto", py: 1.5, px: 1.25 }}>
+        <Box sx={{ flex: 1, overflowY: "auto", py: 0.5 }}>
           <List disablePadding>
             {navItems.map(({ label, path, icon }) => {
               const active = isActive(path);
               return (
-                <ListItem key={path} disablePadding sx={{ mb: 0.5 }}>
+                <ListItem key={path} disablePadding>
                   <ListItemButton
                     component={RouterLink}
                     to={path}
                     onClick={closeDrawer}
                     selected={active}
                     sx={{
-                      borderRadius: 2,
+                      py: 1,
+                      px: 1.75,
+                      minHeight: 44,
+                      borderRadius: 0,
+                      borderLeft: active ? `3px solid ${brand.primary}` : "3px solid transparent",
+                      bgcolor: active ? brand.accentSoft : "transparent",
                       "&.Mui-selected": {
-                        bgcolor: "rgba(139, 21, 56, 0.1)",
+                        bgcolor: brand.accentSoft,
                         color: brand.primary,
+                      },
+                      "&.Mui-selected:hover": {
+                        bgcolor: brand.accentSoft,
+                      },
+                      "&:hover": {
+                        bgcolor: "rgba(0,0,0,0.04)",
                       },
                     }}
                   >
-                    <ListItemIcon sx={{ minWidth: 40, color: active ? brand.primary : brand.muted }}>
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 36,
+                        color: active ? brand.primary : brand.muted,
+                      }}
+                    >
                       {icon}
                     </ListItemIcon>
-                    <ListItemText primary={label} />
+                    <ListItemText
+                      primary={label}
+                      primaryTypographyProps={{
+                        fontSize: "0.875rem",
+                        fontWeight: active ? 700 : 500,
+                        color: active ? brand.primary : brand.ink,
+                        lineHeight: 1.3,
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
               );
             })}
           </List>
 
-          <Divider sx={{ my: 2 }} />
-          <Typography variant="overline" sx={{ px: 2, color: brand.muted, fontWeight: 700 }}>
+          <Divider sx={{ my: 1 }} />
+          <Typography
+            sx={{
+              px: 1.75,
+              pt: 0.5,
+              pb: 1,
+              fontSize: "0.7rem",
+              fontWeight: 700,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              color: brand.muted,
+            }}
+          >
             {t("nav.quickActions")}
           </Typography>
-          <Stack spacing={1} sx={{ px: 1.5, mt: 1, pb: 2 }}>
+          <Stack spacing={1} sx={{ px: 1.5, pb: 2 }}>
             <Button
               component={RouterLink}
               to="/donate-blood-form"
               variant="contained"
               fullWidth
-              startIcon={<HandshakeRoundedIcon />}
+              startIcon={<HandshakeRoundedIcon sx={{ fontSize: 18 }} />}
               onClick={closeDrawer}
+              sx={{
+                minHeight: 42,
+                borderRadius: "8px",
+                fontSize: "0.875rem",
+                fontWeight: 700,
+                boxShadow: "none",
+                "&:hover": { boxShadow: "none", transform: "none" },
+              }}
             >
               {t("nav.becomeDonor")}
             </Button>
@@ -344,8 +427,16 @@ export default function DrawerAppBar({ children, windowRef }) {
               to="/request-blood-form"
               variant="outlined"
               fullWidth
-              startIcon={<BloodtypeRoundedIcon />}
+              startIcon={<BloodtypeRoundedIcon sx={{ fontSize: 18 }} />}
               onClick={closeDrawer}
+              sx={{
+                minHeight: 42,
+                borderRadius: "8px",
+                fontSize: "0.875rem",
+                fontWeight: 700,
+                borderWidth: 1,
+                "&:hover": { borderWidth: 1, transform: "none" },
+              }}
             >
               {t("nav.requestBlood")}
             </Button>

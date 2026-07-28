@@ -31,6 +31,7 @@ import PublicIcon from "@mui/icons-material/Public";
 import { Link as RouterLink } from "react-router-dom";
 import StatDonut from "../components/StatDonut";
 import SectionTitle from "../components/SectionTitle";
+import HomeDonorHighlights from "../components/HomeDonorHighlights";
 import Seo from "../components/Seo";
 import { apiUrl } from "../config/api";
 import { brand } from "../constants/brand";
@@ -321,16 +322,19 @@ export default function Home() {
             display: "flex",
             width: "100%",
             alignItems: "stretch",
+            mx: { xs: -0.5, sm: 0 },
+            px: { xs: 0.5, sm: 0 },
             "@media (max-width: 1023.95px)": {
               flexWrap: "nowrap",
               justifyContent: "flex-start",
-              gap: "24px",
+              gap: { xs: "10px", sm: "16px" },
               overflowX: "auto",
               WebkitOverflowScrolling: "touch",
               scrollSnapType: "x mandatory",
               scrollbarWidth: "none",
               msOverflowStyle: "none",
               "&::-webkit-scrollbar": { display: "none" },
+              pb: 0.5,
             },
             "@media (min-width: 1024px)": {
               flexWrap: "wrap",
@@ -349,8 +353,12 @@ export default function Home() {
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  "@media (max-width: 1023.95px)": {
-                    flex: "0 0 240px",
+                  "@media (max-width: 599.95px)": {
+                    flex: "0 0 156px",
+                    scrollSnapAlign: "start",
+                  },
+                  "@media (min-width: 600px) and (max-width: 1023.95px)": {
+                    flex: "0 0 200px",
                     scrollSnapAlign: "start",
                   },
                   "@media (min-width: 1024px)": {
@@ -372,6 +380,8 @@ export default function Home() {
           )}
         </Box>
       </Container>
+
+      <HomeDonorHighlights />
 
       {/* About snapshot */}
       <Box

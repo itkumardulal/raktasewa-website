@@ -250,7 +250,98 @@ export const en = {
   donors: {
     eyebrow: "Community",
     title: "Donor Recognition",
-    subtitle: "Celebrating people who join and donate to keep our community safe. Tap a donor to see their donation history and activity.",
+    subtitle: "Celebrating people who give safely and return when they can. Every donation saves lives — and rest between donations keeps donors healthy. Tap a donor to see their journey.",
+  },
+  homeSpotlight: {
+    eyebrow: "Community heroes",
+    title: "Top donors & lives recently saved",
+    subtitle: "Real recognition from settled donations on RaktaSewa — every safe donation can save a life.",
+    topDonorsTitle: "Top donors",
+    recentSavedTitle: "Recently saved lives",
+    seeMoreTop: "See more top donors",
+    seeMoreSaved: "See more recent donations",
+    donations: "donations",
+    score: "Score",
+    savedOn: "Life saved on {date}",
+    emptyTop: "No top donors yet. Be among the first to donate and get recognized.",
+    emptySaved: "No recent settled donations yet. Your next safe donation could save a life.",
+  },
+  donorTiers: {
+    tooltipIntro: "Tiers are earned automatically from successful settled donations — not stored separately.",
+    tooltipCount: "Current count: {count} successful donation(s).",
+    range: "{min}–{max} donations",
+    rangeZero: "0 donations (registered)",
+    rangeLegend: "51+ donations",
+    roadmapCta: "See how recognition grows with every safe donation",
+    roadmapTitle: "Recognition tier roadmap",
+    roadmapIntro:
+      "Every settled donation moves you up the ladder. There is no rush — safe, regular giving over months and years is what saves the most lives.",
+    consistencyTitle: "Celebrate consistency, not speed",
+    consistencyBody:
+      "RaktaSewa honors donors who return when they are medically eligible. Rest, recover, and come back when it is safe. That steady rhythm builds a stronger community than donating too often.",
+    currentTier: "Current",
+    tierStep: "Milestone",
+    panelTitle: "Your recognition journey",
+    panelIntro:
+      "Tiers reward settled donations recorded through RaktaSewa. Progress happens at a healthy pace — one safe donation at a time.",
+    yourTier: "Your tier",
+    nextTierMessage: "{count} more settled donation(s) to reach {tier}.",
+    towardNext: "toward next tier",
+    maxTierCelebrate:
+      "You have reached the highest RaktaSewa recognition tier. Thank you for a lifetime of service.",
+    safeGapTitle: "Next eligible donation window",
+    safeGapOverviewTitle: "Recommended time between whole blood donations",
+    safeGapOverview:
+      "Nepal commonly recommends waiting before your next whole blood donation so your body can recover. Steady, safe giving over months and years builds more lives saved than donating too often.",
+    safeGapBody:
+      "For whole blood, Nepal commonly recommends waiting about {days} days after your last donation ({genderNote}). This helps your body recover safely.",
+    gapNote: {
+      male: "standard for men — about 90 days / 3 months",
+      female: "standard for women — about 120 days / 4 months",
+      default: "when gender is not recorded, we use the longer 120-day guidance to stay cautious",
+    },
+    eligibleFirst: "No settled donation on record yet — your first safe donation starts your Lifesaver journey.",
+    eligibleNow: "You may be eligible to donate again. Please confirm with hospital screening before donating.",
+    eligibleOn: "Estimated next eligible date: {date}",
+    daysRemaining: "About {days} day(s) remaining for recommended recovery.",
+    restMessage: "Rest is part of being a great donor. We celebrate you for waiting until it is safe.",
+    medicalDisclaimer:
+      "Guidance only — not medical advice. Final eligibility is always decided by hospital staff and screening.",
+    cardEligibleNow: "May be eligible to donate again — confirm at hospital screening",
+    cardEligibleOn: "Next eligible ~{date}",
+    cardDaysLeft: "{days} day(s) of recommended rest remaining",
+    new: {
+      name: "New Donor",
+      hint: "Registered and ready to save lives. Your first settled donation unlocks Lifesaver.",
+    },
+    lifesaver: {
+      name: "Lifesaver",
+      hint: "1–2 successful donations. Thank you for stepping up when it matters.",
+    },
+    bronze: {
+      name: "Bronze Donor",
+      hint: "3–5 successful donations. A dependable community lifeline.",
+    },
+    silver: {
+      name: "Silver Donor",
+      hint: "6–10 successful donations. Consistent care for patients across Nepal.",
+    },
+    gold: {
+      name: "Gold Donor",
+      hint: "11–20 successful donations. A trusted, repeat volunteer donor.",
+    },
+    diamond: {
+      name: "Diamond Donor",
+      hint: "21–35 successful donations. Exceptional commitment to RaktaSewa.",
+    },
+    platinum: {
+      name: "Platinum Donor",
+      hint: "36–50 successful donations. Among the most dedicated donors in the network.",
+    },
+    legend: {
+      name: "RaktaSewa Legend",
+      hint: "51+ successful donations. A national inspiration for voluntary blood donation.",
+    },
   },
   bloodGroup: {
     eyebrow: "Learn",
