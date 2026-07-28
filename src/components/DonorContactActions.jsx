@@ -10,6 +10,7 @@ import {
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import EditNoteIcon from "@mui/icons-material/EditNote";
+import { usePersistentValue } from "../hooks/usePersistentForm";
 
 const DEFAULT_MSG =
   "Hi! I found your contact from the blood donation app. Are you available to donate blood?";
@@ -22,9 +23,12 @@ function cleanPhone(phone) {
  * Call / WhatsApp with optional custom message for public match results.
  */
 export default function DonorContactActions({ phone, donorName }) {
-  const [openMsg, setOpenMsg] = useState(false);
-  const [message, setMessage] = useState(DEFAULT_MSG);
   const digits = cleanPhone(phone);
+  const [openMsg, setOpenMsg] = useState(false);
+  const [message, setMessage] = usePersistentValue(
+    `raktasewa_draft_wa_msg_${digits || "none"}`,
+    DEFAULT_MSG
+  );
 
   if (!digits) {
     return (

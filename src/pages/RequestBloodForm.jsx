@@ -22,6 +22,7 @@ import {
 import Footer from "./Footer";
 import { apiUrl } from "../config/api";
 import { brand } from "../constants/brand";
+import { usePersistentForm } from "../hooks/usePersistentForm";
 
 const maroon = brand.primary;
 
@@ -45,28 +46,33 @@ const urgencyLevels = [
 ];
 const yesNoOptions = ["Yes", "No"];
 
+const INITIAL_REQUEST_FORM = {
+  patientName: "",
+  patientAge: "",
+  patientGender: "",
+  patientBloodGroup: "",
+  reason: "",
+  amount: "",
+  urgency: "",
+  requiredDateTime: "",
+  hospitalName: "",
+  hospitalAddress: "",
+  cityDistrict: "",
+  contactPerson: "",
+  requesterName: "",
+  requesterPhone: "",
+  altPhone: "",
+  requesterEmail: "",
+  willingToReplace: "",
+  specialNote: "",
+  agree: false,
+};
+
 export default function RequestBloodForm() {
-  const [form, setForm] = useState({
-    patientName: "",
-    patientAge: "",
-    patientGender: "",
-    patientBloodGroup: "",
-    reason: "",
-    amount: "",
-    urgency: "",
-    requiredDateTime: "",
-    hospitalName: "",
-    hospitalAddress: "",
-    cityDistrict: "",
-    contactPerson: "",
-    requesterName: "",
-    requesterPhone: "",
-    altPhone: "",
-    requesterEmail: "",
-    willingToReplace: "",
-    specialNote: "",
-    agree: false,
-  });
+  const [form, setForm, resetForm] = usePersistentForm(
+    "raktasewa_draft_request_blood",
+    INITIAL_REQUEST_FORM
+  );
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
@@ -115,27 +121,7 @@ export default function RequestBloodForm() {
           type: "success",
           text: "Request submitted successfully!",
         });
-        setForm({
-          patientName: "",
-          patientAge: "",
-          patientGender: "",
-          patientBloodGroup: "",
-          reason: "",
-          amount: "",
-          urgency: "",
-          requiredDateTime: "",
-          hospitalName: "",
-          hospitalAddress: "",
-          cityDistrict: "",
-          contactPerson: "",
-          requesterName: "",
-          requesterPhone: "",
-          altPhone: "",
-          requesterEmail: "",
-          willingToReplace: "",
-          specialNote: "",
-          agree: false,
-        });
+        resetForm();
 
         // Swal.fire({
         //   title: "Finding matches...",

@@ -1,16 +1,22 @@
-/** Shared brand tokens for Emergency Blood Provider / Raktasewa */
+/** Shared design tokens for RaktaSewa (रक्तसेवा) — visual system only */
 export const brand = {
-  primary: "#8B1538",
-  primaryDark: "#5C0E25",
-  primaryLight: "#B83A5A",
-  accent: "#0F6B5C",
-  accentSoft: "#E6F4F1",
-  ink: "#1A1523",
-  muted: "#5C5668",
-  surface: "#FFF8F7",
-  surfaceAlt: "#F3EEF0",
-  line: "rgba(139, 21, 56, 0.12)",
+  primary: "#B71C1C",
+  primaryDark: "#8E0000",
+  primaryLight: "#D32F2F",
+  secondary: "#D32F2F",
+  accent: "#D32F2F",
+  accentSoft: "#FDECEC",
+  ink: "#111827",
+  body: "#4B5563",
+  muted: "#6B7280",
+  surface: "#FAFAFA",
+  surfaceAlt: "#F5F5F5",
+  line: "#E5E7EB",
   white: "#FFFFFF",
+  cardShadow: "0 8px 30px rgba(15, 23, 42, 0.08)",
+  cardShadowHover: "0 14px 40px rgba(15, 23, 42, 0.12)",
+  radius: 20,
+  radiusBtn: 14,
 };
 
 export default brand;

@@ -1,24 +1,44 @@
 :root {
-  --brand-primary: #8b1538;
-  --brand-primary-dark: #5c0e25;
-  --brand-accent: #0f6b5c;
-  --brand-ink: #1a1523;
-  --brand-muted: #5c5668;
-  --brand-surface: #fff8f7;
-  --brand-surface-alt: #f3eef0;
-  --brand-line: rgba(139, 21, 56, 0.12);
-  --font-display: "Fraunces", Georgia, serif;
-  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --brand-primary: #b71c1c;
+  --brand-primary-dark: #8e0000;
+  --brand-secondary: #d32f2f;
+  --brand-accent-soft: #fdecec;
+  --brand-ink: #111827;
+  --brand-body: #4b5563;
+  --brand-muted: #6b7280;
+  --brand-surface: #fafafa;
+  --brand-surface-alt: #f5f5f5;
+  --brand-line: #e5e7eb;
+  --brand-white: #ffffff;
+  --card-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+  --card-shadow-hover: 0 14px 40px rgba(15, 23, 42, 0.12);
+  --radius: 20px;
+  --radius-btn: 14px;
+  --section-y: 120px;
+  --font-heading: "Manrope", "Inter", "Noto Sans Devanagari", "Mukta", system-ui, sans-serif;
+  --font-body: "Inter", "Manrope", "Noto Sans Devanagari", "Mukta", system-ui, sans-serif;
 
   font-family: var(--font-body);
-  line-height: 1.6;
+  line-height: 1.8;
   font-weight: 400;
-  color: var(--brand-ink);
+  color: var(--brand-body);
   background-color: var(--brand-surface);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --section-y: 90px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --section-y: 70px;
+  }
 }
 
 html {
@@ -35,11 +55,12 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background:
-    radial-gradient(1200px 500px at 10% -10%, rgba(139, 21, 56, 0.1), transparent 60%),
-    radial-gradient(900px 420px at 100% 0%, rgba(15, 107, 92, 0.08), transparent 55%),
-    var(--brand-surface);
-  color: var(--brand-ink);
+  background: var(--brand-surface);
+  color: var(--brand-body);
+}
+
+html[lang="ne"] body {
+  font-family: "Noto Sans Devanagari", "Mukta", "Inter", system-ui, sans-serif;
 }
 
 #root {
@@ -47,13 +68,48 @@ body {
 }
 
 a {
-  font-weight: 600;
+  font-weight: 500;
   color: inherit;
   text-decoration: none;
 }
 
 img {
   max-width: 100%;
+  height: auto;
+}
+
+.prose,
+.readable {
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.section-pad {
+  padding-block: var(--section-y);
+}
+
+.ds-card {
+  background: var(--brand-white);
+  border: 1px solid var(--brand-line);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 26px;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.ds-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+  margin-bottom: 12px;
 }
 
 @keyframes fade-up {
@@ -77,12 +133,80 @@ img {
   }
 }
 
+@keyframes drop-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.04);
+    opacity: 0.45;
+  }
+}
+
+@keyframes drop-drip {
+  0% {
+    transform: translateY(-6px) scale(0.92);
+    opacity: 0.18;
+  }
+  40% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(14px) scale(1);
+    opacity: 0.12;
+  }
+}
+
+@keyframes cta-glow {
+  0%,
+  100% {
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.16);
+  }
+  50% {
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.26);
+  }
+}
+
 .fade-up {
-  animation: fade-up 0.7s ease both;
+  animation: fade-up 0.65s ease both;
 }
 
 .hero-orb {
-  animation: soft-pulse 5s ease-in-out infinite;
+  animation: soft-pulse 6s ease-in-out infinite;
+}
+
+.hero-drop {
+  position: absolute;
+  width: 16px;
+  height: 24px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+  animation: drop-float 5s ease-in-out infinite;
+}
+
+.hero-drop::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 9px;
+  height: 11px;
+  margin-left: -4.5px;
+  border-radius: 0 0 50% 50%;
+  background: inherit;
+  transform: rotate(45deg);
+  opacity: 0.85;
+}
+
+.hero-drop-drip {
+  animation: drop-drip 4.2s ease-in-out infinite;
+}
+
+.hero-cta-primary {
+  animation: cta-glow 3.5s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -90,7 +214,12 @@ img {
     scroll-behavior: auto;
   }
   .fade-up,
-  .hero-orb {
+  .hero-orb,
+  .hero-drop,
+  .hero-drop-drip,
+  .hero-cta-primary,
+  .ds-card:hover {
     animation: none;
+    transform: none;
   }
 }

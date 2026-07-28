@@ -13,12 +13,16 @@ import {
 } from "@mui/material";
 import { apiUrl } from "../config/api";
 import DonorContactActions from "../components/DonorContactActions";
+import { usePersistentValue } from "../hooks/usePersistentForm";
 
 export default function RequestMatchResult() {
   const { requestId, bloodGroup } = useParams();
   const [loading, setLoading] = useState(true);
   const [matches, setMatches] = useState([]);
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer, clearAnswer] = usePersistentValue(
+    `raktasewa_draft_match_answer_${requestId || "unknown"}`,
+    ""
+  );
 
   useEffect(() => {
     (async () => {
@@ -53,6 +57,7 @@ export default function RequestMatchResult() {
       body: JSON.stringify({ request_id: requestId, status }),
     });
 
+    clearAnswer();
     alert("Thank you! Your response has been saved.");
     window.close();
   };

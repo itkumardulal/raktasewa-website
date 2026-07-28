@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { brand } from "../constants/brand";
 import { apiUrl } from "../config/api";
+import { useLanguage } from "../i18n/LanguageContext";
+import SectionTitle from "../components/SectionTitle";
 
 const maroon = brand.primary;
 
@@ -55,12 +57,13 @@ function DonorCard({ donor }) {
       sx={{
         flexBasis: { xs: "100%", sm: "47%", md: "30%" },
         maxWidth: 360,
-        p: 3,
+        p: { xs: 2.5, sm: 3.25 },
         textAlign: "center",
-        borderRadius: 3,
+        borderRadius: `${brand.radius}px`,
         border: `1px solid ${brand.line}`,
+        boxShadow: brand.cardShadow,
         height: "100%",
-        transition: "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
+        transition: "transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease",
         cursor: id ? "pointer" : "default",
         textDecoration: "none",
         color: "inherit",
@@ -69,7 +72,7 @@ function DonorCard({ donor }) {
           ? {
               transform: "translateY(-4px)",
               borderColor: maroon,
-              boxShadow: `0 12px 28px ${maroon}18`,
+              boxShadow: brand.cardShadowHover,
             }
           : undefined,
       }}
@@ -132,6 +135,7 @@ function DonorCard({ donor }) {
 }
 
 export default function RecentDonors() {
+  const { t } = useLanguage();
   const [tab, setTab] = useState(0);
   const [donors, setDonors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -171,18 +175,14 @@ export default function RecentDonors() {
   }, [tab]);
 
   return (
-    <Container sx={{ my: 8 }}>
-      <Typography variant="h5" align="center" sx={{ mb: 2, fontWeight: 700 }}>
-        Donor&nbsp;Recognition
-      </Typography>
-      <Typography
-        align="center"
-        color="text.secondary"
-        sx={{ mb: 3, maxWidth: 480, mx: "auto" }}
-      >
-        Celebrating people who join and donate to keep our community safe.
-        Tap a donor to see their donation history and activity.
-      </Typography>
+    <Container className="section-pad" maxWidth="lg">
+      <SectionTitle
+        component="h1"
+        variant="h1"
+        eyebrow={t("donors.eyebrow")}
+        title={t("donors.title")}
+        subtitle={t("donors.subtitle")}
+      />
 
       <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
         <Tabs

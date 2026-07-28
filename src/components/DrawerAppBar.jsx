@@ -16,6 +16,8 @@ import {
   Button,
   Divider,
   Stack,
+  ToggleButton,
+  ToggleButtonGroup,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -25,28 +27,13 @@ import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import BloodtypeRoundedIcon from "@mui/icons-material/BloodtypeRounded";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 import HandshakeRoundedIcon from "@mui/icons-material/HandshakeRounded";
+import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
+import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
+import ContactMailRoundedIcon from "@mui/icons-material/ContactMailRounded";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { brand } from "../constants/brand";
-
-const navItems = [
-  { label: "Home", path: "/", icon: <HomeRoundedIcon fontSize="small" /> },
-  { label: "About", path: "/about", icon: <InfoOutlinedIcon fontSize="small" /> },
-  {
-    label: "Our Team",
-    path: "/team",
-    icon: <GroupsRoundedIcon fontSize="small" />,
-  },
-  {
-    label: "Blood Group",
-    path: "/blood-group",
-    icon: <BloodtypeRoundedIcon fontSize="small" />,
-  },
-  {
-    label: "Donors",
-    path: "/recent-donors",
-    icon: <VolunteerActivismRoundedIcon fontSize="small" />,
-  },
-];
+import { useLanguage } from "../i18n/LanguageContext";
 
 const drawerWidth = 300;
 
@@ -55,6 +42,19 @@ export default function DrawerAppBar({ children, windowRef }) {
   const toggleDrawer = () => setMobileOpen((open) => !open);
   const closeDrawer = () => setMobileOpen(false);
   const location = useLocation();
+  const { t, lang, setLang } = useLanguage();
+
+  const navItems = [
+    { label: t("nav.home"), path: "/", icon: <HomeRoundedIcon fontSize="small" /> },
+    { label: t("nav.about"), path: "/about", icon: <InfoOutlinedIcon fontSize="small" /> },
+    { label: t("nav.knowledge"), path: "/knowledge", icon: <MenuBookRoundedIcon fontSize="small" /> },
+    { label: t("nav.blog"), path: "/blog", icon: <ArticleRoundedIcon fontSize="small" /> },
+    { label: t("nav.donors"), path: "/recent-donors", icon: <VolunteerActivismRoundedIcon fontSize="small" /> },
+    { label: t("nav.bloodGroup"), path: "/blood-group", icon: <BloodtypeRoundedIcon fontSize="small" /> },
+    { label: t("nav.faq"), path: "/faq", icon: <HelpOutlineRoundedIcon fontSize="small" /> },
+    { label: t("nav.contact"), path: "/contact", icon: <ContactMailRoundedIcon fontSize="small" /> },
+    { label: t("nav.team"), path: "/team", icon: <GroupsRoundedIcon fontSize="small" /> },
+  ];
 
   const container =
     windowRef !== undefined
@@ -66,13 +66,42 @@ export default function DrawerAppBar({ children, windowRef }) {
       ? location.pathname === "/"
       : location.pathname.startsWith(path);
 
+  const LangToggle = (
+    <ToggleButtonGroup
+      exclusive
+      size="small"
+      value={lang}
+      onChange={(_e, next) => next && setLang(next)}
+      aria-label={t("nav.language")}
+      sx={{
+        bgcolor: brand.white,
+        border: `1px solid ${brand.line}`,
+        "& .MuiToggleButton-root": {
+          px: 1,
+          py: 0.25,
+          fontSize: 12,
+          fontWeight: 700,
+          border: "none",
+          color: brand.muted,
+          "&.Mui-selected": {
+            bgcolor: brand.accentSoft,
+            color: brand.primary,
+          },
+        },
+      }}
+    >
+      <ToggleButton value="en">EN</ToggleButton>
+      <ToggleButton value="ne">ने</ToggleButton>
+    </ToggleButtonGroup>
+  );
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <AppBar
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: "rgba(255, 248, 247, 0.92)",
+          bgcolor: "rgba(250, 250, 250, 0.92)",
           color: brand.ink,
           backdropFilter: "blur(14px)",
           borderBottom: `1px solid ${brand.line}`,
@@ -83,10 +112,10 @@ export default function DrawerAppBar({ children, windowRef }) {
             color="inherit"
             edge="start"
             onClick={toggleDrawer}
-            aria-label="Open navigation menu"
+            aria-label={t("nav.menu")}
             sx={{
               mr: 0.5,
-              display: { xs: "inline-flex", sm: "none" },
+              display: { xs: "inline-flex", md: "none" },
               border: `1px solid ${brand.line}`,
               borderRadius: 2,
             }}
@@ -109,24 +138,26 @@ export default function DrawerAppBar({ children, windowRef }) {
           >
             <Box
               component="img"
-              src="/qr_code.jpeg"
-              alt="Emergency Blood Provider"
+              src="/logo.png"
+              alt={`${t("brand.name")} (${t("brand.nameNp")})`}
               sx={{
-                height: 40,
-                width: 40,
+                height: 44,
+                width: 44,
                 borderRadius: "50%",
-                objectFit: "cover",
-                border: `2px solid ${brand.primary}`,
+                objectFit: "contain",
+                bgcolor: brand.white,
+                border: `1px solid ${brand.line}`,
                 flexShrink: 0,
+                p: 0.35,
               }}
             />
             <Box sx={{ minWidth: 0 }}>
               <Typography
                 variant="h6"
                 sx={{
-                  fontFamily: "Fraunces, Georgia, serif",
+                  fontFamily: '"Manrope", "Inter", sans-serif',
                   fontWeight: 700,
-                  fontSize: { xs: "0.95rem", sm: "1.2rem" },
+                  fontSize: { xs: "0.95rem", sm: "1.15rem" },
                   lineHeight: 1.15,
                   color: brand.primary,
                   whiteSpace: "nowrap",
@@ -134,33 +165,35 @@ export default function DrawerAppBar({ children, windowRef }) {
                   textOverflow: "ellipsis",
                 }}
               >
-                Emergency Blood Provider
+                {t("brand.name")} · {t("brand.nameNp")}
               </Typography>
               <Typography
                 variant="caption"
                 sx={{
                   display: { xs: "none", sm: "block" },
                   color: brand.muted,
-                  letterSpacing: "0.04em",
+                  letterSpacing: "0.02em",
                 }}
               >
-                Donate · Request · Save lives
+                {t("brand.tagline")}
               </Typography>
             </Box>
           </Box>
 
-          <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 0.5 }}>
-            {navItems.map(({ label, path }) => {
+          <Box sx={{ display: { xs: "none", lg: "flex" }, gap: 0.25, flexWrap: "wrap", justifyContent: "flex-end", maxWidth: 560 }}>
+            {navItems.slice(0, 6).map(({ label, path }) => {
               const active = isActive(path);
               return (
                 <Button
-                  key={label}
+                  key={path}
                   component={RouterLink}
                   to={path}
+                  size="small"
                   sx={{
                     color: active ? brand.primary : brand.ink,
                     bgcolor: active ? "rgba(139, 21, 56, 0.08)" : "transparent",
-                    px: 1.5,
+                    px: 1.25,
+                    minWidth: 0,
                     "&:hover": {
                       bgcolor: "rgba(139, 21, 56, 0.1)",
                       color: brand.primary,
@@ -172,10 +205,25 @@ export default function DrawerAppBar({ children, windowRef }) {
               );
             })}
           </Box>
+
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>{LangToggle}</Box>
+
+          <IconButton
+            color="inherit"
+            edge="start"
+            onClick={toggleDrawer}
+            aria-label={t("nav.menu")}
+            sx={{
+              display: { xs: "none", md: "inline-flex", lg: "none" },
+              border: `1px solid ${brand.line}`,
+              borderRadius: 2,
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
 
-      {/* Mobile side navigation */}
       <Drawer
         container={container}
         open={mobileOpen}
@@ -184,7 +232,7 @@ export default function DrawerAppBar({ children, windowRef }) {
         ModalProps={{ keepMounted: true }}
         transitionDuration={{ enter: 280, exit: 220 }}
         sx={{
-          display: { xs: "block", sm: "none" },
+          display: { xs: "block", lg: "none" },
           "& .MuiBackdrop-root": {
             backgroundColor: "rgba(26, 21, 35, 0.45)",
             backdropFilter: "blur(4px)",
@@ -193,16 +241,13 @@ export default function DrawerAppBar({ children, windowRef }) {
             width: "min(86vw, 320px)",
             boxSizing: "border-box",
             border: "none",
-            background: `
-              linear-gradient(165deg, ${brand.white} 0%, ${brand.surface} 55%, #f7eef1 100%)
-            `,
-            boxShadow: "8px 0 40px rgba(26, 21, 35, 0.18)",
+            background: brand.white,
+            boxShadow: "8px 0 40px rgba(15, 23, 42, 0.12)",
             display: "flex",
             flexDirection: "column",
           },
         }}
       >
-        {/* Header */}
         <Box
           sx={{
             px: 2.5,
@@ -217,187 +262,98 @@ export default function DrawerAppBar({ children, windowRef }) {
         >
           <Box
             component="img"
-            src="/qr_code.jpeg"
+            src="/logo.png"
             alt=""
             sx={{
               width: 48,
               height: 48,
               borderRadius: "50%",
-              objectFit: "cover",
+              objectFit: "contain",
+              bgcolor: brand.white,
               border: "2px solid rgba(255,255,255,0.85)",
               flexShrink: 0,
+              p: 0.35,
             }}
           />
           <Box sx={{ flex: 1, minWidth: 0, pt: 0.25 }}>
-            <Typography
-              sx={{
-                fontFamily: "Fraunces, Georgia, serif",
-                fontWeight: 700,
-                fontSize: "1.05rem",
-                lineHeight: 1.2,
-              }}
-            >
-              Emergency Blood Provider
+            <Typography sx={{ fontFamily: '"Manrope", "Inter", sans-serif', fontWeight: 700, fontSize: "1.05rem", lineHeight: 1.2 }}>
+              {t("brand.name")}
             </Typography>
-            <Typography
-              variant="caption"
-              sx={{ opacity: 0.85, display: "block", mt: 0.5 }}
-            >
-              Menu
+            <Typography variant="caption" sx={{ opacity: 0.85, display: "block", mt: 0.5 }}>
+              {t("nav.menu")}
             </Typography>
           </Box>
           <IconButton
             onClick={closeDrawer}
-            aria-label="Close navigation menu"
+            aria-label={t("nav.close")}
             size="small"
-            sx={{
-              color: brand.white,
-              bgcolor: "rgba(255,255,255,0.12)",
-              "&:hover": { bgcolor: "rgba(255,255,255,0.22)" },
-            }}
+            sx={{ color: brand.white, bgcolor: "rgba(255,255,255,0.12)", "&:hover": { bgcolor: "rgba(255,255,255,0.22)" } }}
           >
             <CloseRoundedIcon fontSize="small" />
           </IconButton>
         </Box>
 
-        {/* Links */}
+        <Box sx={{ px: 2, py: 1.5 }}>{LangToggle}</Box>
+
         <Box sx={{ flex: 1, overflowY: "auto", py: 1.5, px: 1.25 }}>
-          <Typography
-            variant="overline"
-            sx={{
-              px: 2,
-              color: brand.muted,
-              letterSpacing: "0.12em",
-              fontWeight: 700,
-            }}
-          >
-            Navigate
-          </Typography>
-          <List disablePadding sx={{ mt: 0.5 }}>
+          <List disablePadding>
             {navItems.map(({ label, path, icon }) => {
               const active = isActive(path);
               return (
-                <ListItem key={label} disablePadding sx={{ mb: 0.5 }}>
+                <ListItem key={path} disablePadding sx={{ mb: 0.5 }}>
                   <ListItemButton
                     component={RouterLink}
                     to={path}
                     onClick={closeDrawer}
                     selected={active}
                     sx={{
-                      borderRadius: 2.5,
-                      py: 1.35,
-                      px: 1.75,
-                      gap: 0.5,
-                      color: active ? brand.primary : brand.ink,
-                      bgcolor: active ? "rgba(139, 21, 56, 0.09)" : "transparent",
-                      border: active
-                        ? `1px solid ${brand.line}`
-                        : "1px solid transparent",
-                      transition: "background-color 0.2s ease, transform 0.2s ease",
-                      "&:hover": {
-                        bgcolor: "rgba(139, 21, 56, 0.08)",
+                      borderRadius: 2,
+                      "&.Mui-selected": {
+                        bgcolor: "rgba(139, 21, 56, 0.1)",
                         color: brand.primary,
-                      },
-                      "&.Mui-selected:hover": {
-                        bgcolor: "rgba(139, 21, 56, 0.12)",
-                      },
-                      "& .MuiListItemIcon-root": {
-                        minWidth: 40,
-                        color: "inherit",
                       },
                     }}
                   >
-                    <ListItemIcon>{icon}</ListItemIcon>
-                    <ListItemText
-                      primary={label}
-                      primaryTypographyProps={{
-                        fontWeight: active ? 800 : 600,
-                        fontSize: "0.95rem",
-                      }}
-                    />
-                    {active && (
-                      <Box
-                        sx={{
-                          width: 8,
-                          height: 8,
-                          borderRadius: "50%",
-                          bgcolor: brand.primary,
-                          flexShrink: 0,
-                        }}
-                      />
-                    )}
+                    <ListItemIcon sx={{ minWidth: 40, color: active ? brand.primary : brand.muted }}>
+                      {icon}
+                    </ListItemIcon>
+                    <ListItemText primary={label} />
                   </ListItemButton>
                 </ListItem>
               );
             })}
           </List>
-        </Box>
 
-        <Divider sx={{ borderColor: brand.line }} />
-
-        {/* Quick actions — same routes as Home CTAs */}
-        <Box sx={{ p: 2 }}>
-          <Typography
-            variant="overline"
-            sx={{
-              px: 0.5,
-              color: brand.muted,
-              letterSpacing: "0.12em",
-              fontWeight: 700,
-            }}
-          >
-            Quick actions
+          <Divider sx={{ my: 2 }} />
+          <Typography variant="overline" sx={{ px: 2, color: brand.muted, fontWeight: 700 }}>
+            {t("nav.quickActions")}
           </Typography>
-          <Stack spacing={1.25} sx={{ mt: 1 }}>
+          <Stack spacing={1} sx={{ px: 1.5, mt: 1, pb: 2 }}>
             <Button
               component={RouterLink}
               to="/donate-blood-form"
-              onClick={closeDrawer}
               variant="contained"
-              color="primary"
               fullWidth
               startIcon={<HandshakeRoundedIcon />}
-              sx={{ py: 1.2, justifyContent: "flex-start", pl: 2 }}
+              onClick={closeDrawer}
             >
-              Become a donor
+              {t("nav.becomeDonor")}
             </Button>
             <Button
               component={RouterLink}
               to="/request-blood-form"
-              onClick={closeDrawer}
               variant="outlined"
-              color="primary"
               fullWidth
               startIcon={<BloodtypeRoundedIcon />}
-              sx={{
-                py: 1.2,
-                justifyContent: "flex-start",
-                pl: 2,
-                borderWidth: 1.5,
-              }}
+              onClick={closeDrawer}
             >
-              Request blood
+              {t("nav.requestBlood")}
             </Button>
           </Stack>
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            sx={{ display: "block", mt: 2, textAlign: "center" }}
-          >
-            Donate · Request · Save lives
-          </Typography>
         </Box>
       </Drawer>
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-        }}
-      >
+      <Box component="main" sx={{ flexGrow: 1, width: "100%" }}>
         {children}
       </Box>
     </Box>
@@ -405,6 +361,6 @@ export default function DrawerAppBar({ children, windowRef }) {
 }
 
 DrawerAppBar.propTypes = {
-  windowRef: PropTypes.func,
   children: PropTypes.node,
+  windowRef: PropTypes.func,
 };

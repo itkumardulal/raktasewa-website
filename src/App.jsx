@@ -7,16 +7,21 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
 import DrawerAppBar from "./components/DrawerAppBar";
 import AppRouter from "./routes/AppRouter";
+import { LanguageProvider } from "./i18n/LanguageContext";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <DrawerAppBar>
-          <AppRouter />
-        </DrawerAppBar>
-      </BrowserRouter>
+      <LanguageProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <DrawerAppBar>
+            <AppRouter />
+          </DrawerAppBar>
+        </BrowserRouter>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

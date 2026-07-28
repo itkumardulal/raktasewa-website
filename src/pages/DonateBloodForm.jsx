@@ -20,6 +20,7 @@ import {
 import Footer from "./Footer";
 import { apiUrl } from "../config/api";
 import { brand } from "../constants/brand";
+import { usePersistentForm } from "../hooks/usePersistentForm";
 
 const maroon = brand.primary;
 
@@ -36,17 +37,22 @@ const bloodGroups = [
 ];
 const genders = ["Male", "Female", "Other"];
 
+const INITIAL_DONATE_FORM = {
+  name: "",
+  age: "",
+  gender: "",
+  blood: "",
+  email: "",
+  phone: "",
+  address: "",
+  agree: false,
+};
+
 export default function DonateBloodForm() {
-  const [form, setForm] = useState({
-    name: "",
-    age: "",
-    gender: "",
-    blood: "",
-    email: "",
-    phone: "",
-    address: "",
-    agree: false,
-  });
+  const [form, setForm, resetForm] = usePersistentForm(
+    "raktasewa_draft_donate_blood",
+    INITIAL_DONATE_FORM
+  );
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null); // { type: "success" | "error", text: "..." }
@@ -85,16 +91,7 @@ export default function DonateBloodForm() {
           type: "success",
           text: data.message || "Thank you for donating!",
         });
-        setForm({
-          name: "",
-          age: "",
-          gender: "",
-          blood: "",
-          email: "",
-          phone: "",
-          address: "",
-          agree: false,
-        });
+        resetForm();
       } else {
         setMessage({
           type: "error",
